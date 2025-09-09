@@ -26,16 +26,16 @@ functionName(param1:type1,param2%3F:type2):ReturnType
 ### Object Types
 {property1:type1,property2%3F:type2}
 
-### Generic Types
-functionName<T>(param:T[]):T[]
-functionName<T+extends+SomeType>(param:T):T
-
 ### Union Types
 (param:string|number):boolean
 
 ### Array Types
-param:string[]
-param:Array<{id:number,name:string}>
+param:array
+param:{foo:string,bar:number}[]
+
+### Documentation with Types
+For complex modules that need detailed documentation, append documentation after the type signature using |:
+functionName(param:type):ReturnType|Your documentation here describing the module behavior
 
 ### Special Characters
 - Use %3F for optional parameters (?)
@@ -44,26 +44,64 @@ param:Array<{id:number,name:string}>
 
 ## Examples
 
-### Basic Function
+### Currency formatter with full typedef
 https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js
 
-### Generic Function
-https://unpkg.ai/esm/chunk<T>(array:T[],size:number):T[][].js
+### User fetcher with complex types
+https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js
 
-### Complex API Client
-https://unpkg.ai/esm/createApiClient(config:{baseUrl:string,apiKey:string}):{get<T>(path:string):Promise<T>,post<T>(path:string,data:any):Promise<T>}.js
-
-### React Component
+### React component with typed props
 https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js
 
-### Multi-word Function Names
-https://unpkg.ai/esm/validate+email+address(email:string):boolean.js
+### Array utilities
+https://unpkg.ai/esm/chunk(array,size):array.js
+
+### API client
+https://unpkg.ai/esm/createApiClient(config):object.js
+
+## Complex Frontend Examples
+
+### Advanced form validator with real-time feedback
+https://unpkg.ai/esm/createFormValidator(config:{fields:{[key:string]:{required%3F:boolean,minLength%3F:number,pattern%3F:RegExp,validator%3F:(value:string)=>Promise<boolean>}},realTime%3F:boolean}):Promise<{validate:(formData:FormData)=>Promise<{isValid:boolean,errors:{[field:string]:string[]}}>,attachToForm:(form:HTMLFormElement)=>void,onFieldChange:(callback:(field:string,isValid:boolean,errors:string[])=>void)=>void}>.js
+
+### Drag and drop file uploader with progress tracking
+https://unpkg.ai/esm/createFileUploader(config:{endpoint:string,maxFileSize%3F:number,allowedTypes%3F:string[],multiple%3F:boolean,chunkSize%3F:number}):Promise<{attachTo:(element:HTMLElement)=>void,upload:(files:FileList)=>Promise<{success:boolean,results:{file:string,url%3F:string,error%3F:string}[]}>,onProgress:(callback:(file:string,percent:number)=>void)=>void}>.js
+
+### Rich text editor with markdown support
+https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string,plugins%3F:string[],autoSave%3F:boolean}):Promise<{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void,onContentChange:(callback:(content:string,wordCount:number)=>void)=>void,exportAs:(format:'html'|'markdown'|'pdf')=>Promise<string|Blob>}>.js
+
+### Interactive data visualization dashboard
+https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string,responsive%3F:boolean}):Promise<{addChart:(id:string,type:string,data:any[],options%3F:any)=>void,updateChart:(id:string,data:any[])=>void,addFilter:(name:string,type:string,values:any[])=>void,onFilterChange:(callback:(filters:any)=>void)=>void,exportDashboard:(format:'png'|'pdf')=>Promise<Blob>}>.js
 
 ## Usage in Code
 
 ```javascript
 import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
 console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"
+```
+
+```javascript
+import { fetchUser } from 'https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js';
+const user = await fetchUser(123, { includeProfile: true, timeout: 5000 });
+```
+
+```javascript
+import { LoadingSpinner } from 'https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js';
+return <LoadingSpinner size={24} color="blue" isVisible={loading} />;
+```
+
+```javascript
+import { chunk } from 'https://unpkg.ai/esm/chunk(array,size):array.js';
+const numbers = [1, 2, 3, 4, 5, 6];
+const chunked = chunk(numbers, 2); // [[1, 2], [3, 4], [5, 6]]
+```
+
+```javascript
+import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config):object.js';
+const api = createApiClient({ 
+  baseUrl: 'https://api.example.com', 
+  apiKey: 'key123' 
+});
 ```
 
 ## Features

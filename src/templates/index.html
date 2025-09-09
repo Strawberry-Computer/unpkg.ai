@@ -143,18 +143,103 @@ console.log(formatCurrency(1234.56, 'EUR'));
     
     <h3>Array Utilities</h3>
     <pre><code>// Chunk array into smaller arrays
-import { chunk } from 'https://unpkg.ai/esm/chunk<T>(array:T[],size:number):T[][].js';
-const chunked = chunk([1,2,3,4,5,6], 2); // [[1,2], [3,4], [5,6]]</code></pre>
+import { chunk } from 'https://unpkg.ai/esm/chunk(array,size):array.js';
+const numbers = [1, 2, 3, 4, 5, 6];
+const chunked = chunk(numbers, 2); // [[1, 2], [3, 4], [5, 6]]</code></pre>
+
+    <h3>User Fetcher with Complex Types</h3>
+    <pre><code>// Fetch user with typed options
+import { fetchUser } from 'https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js';
+const user = await fetchUser(123, { includeProfile: true, timeout: 5000 });</code></pre>
 
     <h3>API Client</h3>
-    <pre><code>// Create typed API client
-import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config:{baseUrl:string,apiKey:string}):{get<T>(path:string):Promise<T>}.js';
-const api = createApiClient({ baseUrl: 'https://api.example.com', apiKey: 'key123' });</code></pre>
+    <pre><code>// Create API client
+import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config):object.js';
+const api = createApiClient({ 
+  baseUrl: 'https://api.example.com', 
+  apiKey: 'key123' 
+});</code></pre>
 
     <h3>React Components</h3>
     <pre><code>// Generate React components with typed props
-import { LoadingSpinner } from 'https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string}):JSX.Element.js';
-return &lt;LoadingSpinner size={24} color="blue" /&gt;;</code></pre>
+import { LoadingSpinner } from 'https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js';
+return &lt;LoadingSpinner size={24} color="blue" isVisible={loading} /&gt;;</code></pre>
+
+    <h2>🎨 Complex Frontend Examples</h2>
+    
+    <h3>Advanced Form Validator</h3>
+    <pre><code>// Real-time form validation with async validators
+import { createFormValidator } from 'https://unpkg.ai/esm/createFormValidator(config:{fields:{[key:string]:{required%3F:boolean,minLength%3F:number,pattern%3F:RegExp,validator%3F:(value:string)=>Promise<boolean>}},realTime%3F:boolean}):Promise<{validate:(formData:FormData)=>Promise<{isValid:boolean,errors:{[field:string]:string[]}}>,attachToForm:(form:HTMLFormElement)=>void,onFieldChange:(callback:(field:string,isValid:boolean,errors:string[])=>void)=>void}>.js';
+
+const validator = await createFormValidator({
+  fields: {
+    email: { required: true, pattern: /^[^@]+@[^@]+\.[^@]+$/ },
+    username: { required: true, minLength: 3, validator: async (val) => {
+      const response = await fetch(`/api/check-username/${val}`);
+      return response.ok;
+    }},
+    password: { required: true, minLength: 8 }
+  },
+  realTime: true
+});
+
+const form = document.getElementById('signupForm');
+validator.attachToForm(form);</code></pre>
+
+    <h3>Drag & Drop File Uploader</h3>
+    <pre><code>// Modern file uploader with progress tracking
+import { createFileUploader } from 'https://unpkg.ai/esm/createFileUploader(config:{endpoint:string,maxFileSize%3F:number,allowedTypes%3F:string[],multiple%3F:boolean,chunkSize%3F:number}):Promise<{attachTo:(element:HTMLElement)=>void,upload:(files:FileList)=>Promise<{success:boolean,results:{file:string,url%3F:string,error%3F:string}[]}>,onProgress:(callback:(file:string,percent:number)=>void)=>void}>.js';
+
+const uploader = await createFileUploader({
+  endpoint: '/api/upload',
+  maxFileSize: 50 * 1024 * 1024, // 50MB
+  allowedTypes: ['image/*', 'video/*', '.pdf'],
+  multiple: true,
+  chunkSize: 1024 * 1024 // 1MB chunks
+});
+
+const dropZone = document.getElementById('dropZone');
+uploader.attachTo(dropZone);
+
+uploader.onProgress((filename, percent) => {
+  document.getElementById(`progress-${filename}`).value = percent;
+});</code></pre>
+
+    <h3>Rich Text Editor</h3>
+    <pre><code>// WYSIWYG editor with markdown support
+import { createRichEditor } from 'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string,plugins%3F:string[],autoSave%3F:boolean}):Promise<{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void,onContentChange:(callback:(content:string,wordCount:number)=>void)=>void,exportAs:(format:'html'|'markdown'|'pdf')=>Promise<string|Blob>}>.js';
+
+const editor = await createRichEditor({
+  container: '#editor',
+  features: ['bold', 'italic', 'lists', 'links', 'images', 'tables', 'code'],
+  theme: 'modern',
+  plugins: ['markdown', 'syntax-highlight'],
+  autoSave: true
+});
+
+editor.onContentChange((content, wordCount) => {
+  document.getElementById('wordCount').textContent = `${wordCount} words`;
+});
+
+editor.setContent('# Welcome\n\nStart typing...');</code></pre>
+
+    <h3>Interactive Data Dashboard</h3>
+    <pre><code>// Dashboard with multiple chart types
+import { createDashboard } from 'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string,responsive%3F:boolean}):Promise<{addChart:(id:string,type:string,data:any[],options%3F:any)=>void,updateChart:(id:string,data:any[])=>void,addFilter:(name:string,type:string,values:any[])=>void,onFilterChange:(callback:(filters:any)=>void)=>void,exportDashboard:(format:'png'|'pdf')=>Promise<Blob>}>.js';
+
+const dashboard = await createDashboard({
+  container: '#dashboard',
+  layout: 'grid',
+  responsive: true
+});
+
+dashboard.addChart('sales', 'line', [
+  { x: 'Jan', y: 1000 },
+  { x: 'Feb', y: 1200 },
+  { x: 'Mar', y: 1100 }
+], { title: 'Monthly Sales' });
+
+dashboard.addFilter('dateRange', 'date', ['2024-01-01', '2024-12-31']);</code></pre>
 
     <h2>🎯 Prompt Syntax</h2>
     <ul>
