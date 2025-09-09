@@ -5,9 +5,9 @@ services:
     plan: starter
     buildCommand: npm install
     startCommand: npm start
-    customDomains:
-      - name: unpkg.ai
-      - name: www.unpkg.ai
+    domains:
+      - unpkg.ai
+      - www.unpkg.ai
     envVars:
       - key: NODE_ENV
         value: production
