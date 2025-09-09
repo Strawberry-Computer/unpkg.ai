@@ -25,55 +25,47 @@ GET /esm/{url-encoded-prompt}.js?model={model}&seed={seed}
 | `model` | AI model to use for generation | `gpt-4`, `claude-3`, `mistral` | No |
 | `seed` | Random seed for deterministic output | `12345` | No |
 
-## Examples
+## Interactive Examples
 
-### Currency formatter with full typedef
-**Request:** [https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js](https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js)
+### Tip Calculator with Bill Splitting
+**Request:** [https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js](https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js)
 
 ```javascript
-import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
+import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
 
-console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"
+const result = calculateTip(85.50, 18, 4);
+console.log(result); // { tip: 15.39, total: 100.89, perPerson: 25.22 }
 ```
 
-### User fetcher with complex types
-**Request:** [https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js](https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js)
+### Secure Password Generator
+**Request:** [https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js](https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js)
 
 ```javascript
-import { fetchUser } from 'https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js';
+import { generatePassword } from 'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
 
-const user = await fetchUser(123, { includeProfile: true, timeout: 5000 });
+const result = generatePassword({ length: 16, symbols: true, numbers: true });
+console.log(result); // { password: 'K#9m$L2pQ!7vX8nR', strength: 95, feedback: ['Very strong'] }
 ```
 
-### React component with typed props
-**Request:** [https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js](https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js)
+### Color Palette Generator
+**Request:** [https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:'complementary'|'analogous'|'triadic'):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js](https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:'complementary'|'analogous'|'triadic'):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js)
 
 ```javascript
-import { LoadingSpinner } from 'https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js';
+import { generatePalette } from 'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:'complementary'|'analogous'|'triadic'):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
 
-return <LoadingSpinner size={24} color="blue" isVisible={loading} />;
+const palette = generatePalette('#3B82F6', 5, 'complementary');
+console.log(palette.colors); // Array of 5 complementary colors with multiple formats
 ```
 
-### Array utilities
-**Request:** [https://unpkg.ai/esm/chunk(array,size):array.js](https://unpkg.ai/esm/chunk(array,size):array.js)
+### Minesweeper Game Engine
+**Request:** [https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>'win'|'lose'|'continue',flag:(x:number,y:number)=>boolean,getState:()=>'playing'|'won'|'lost',reset:()=>void}.js](https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>'win'|'lose'|'continue',flag:(x:number,y:number)=>boolean,getState:()=>'playing'|'won'|'lost',reset:()=>void}.js)
 
 ```javascript
-import { chunk } from 'https://unpkg.ai/esm/chunk(array,size):array.js';
+import { createMinesweeper } from 'https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>'win'|'lose'|'continue',flag:(x:number,y:number)=>boolean,getState:()=>'playing'|'won'|'lost',reset:()=>void}.js';
 
-const numbers = [1, 2, 3, 4, 5, 6];
-const chunked = chunk(numbers, 2); // [[1, 2], [3, 4], [5, 6]]
-```
-
-### API client
-**Request:** [https://unpkg.ai/esm/createApiClient(config):object.js](https://unpkg.ai/esm/createApiClient(config):object.js)
-
-```javascript
-import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config):object.js';
-
-const api = createApiClient({ 
-  baseUrl: 'https://api.example.com', 
-  apiKey: 'key123' 
-});
+const game = createMinesweeper(10, 10, 15);
+const result = game.reveal(5, 5); // 'continue', 'win', or 'lose'
+game.flag(2, 3); // Toggle flag on cell
 ```
 
 ## Complex Frontend Examples with Documentation

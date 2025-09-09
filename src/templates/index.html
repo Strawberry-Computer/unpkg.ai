@@ -53,6 +53,72 @@
         }
         th { background: #f9fafb; font-weight: 600; }
         .highlight { background: #fef3c7; padding: 0.1rem 0.3rem; border-radius: 0.25rem; }
+        
+        /* Button animations and consistent styling */
+        .try-now-btn {
+            padding: 0.5rem 1rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease-in-out;
+            transform: translateY(0);
+        }
+        
+        .try-now-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+        
+        .try-now-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+        }
+        
+        .secondary-btn {
+            padding: 0.5rem 1rem;
+            background: #6b7280;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            transform: translateY(0);
+        }
+        
+        .secondary-btn:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(107, 114, 128, 0.3);
+        }
+        
+        .secondary-btn:active {
+            transform: translateY(0);
+        }
+        
+        .view-module-btn {
+            padding: 0.5rem 1rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            transform: translateY(0);
+        }
+        
+        .view-module-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+        }
+        
+        .view-module-btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -79,63 +145,105 @@ console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"</code></pre>
         <tr><td><code>seed</code></td><td>Random seed for deterministic output</td><td><code>12345</code></td><td>No</td></tr>
     </table>
 
-    <h2>🎮 Interactive Demo</h2>
-    
-    <div style="border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: #fafafa; font-family: 'Monaco', 'Menlo', monospace;">
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-            <!-- Input Panel -->
-            <div style="border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 1rem; background: white;">
-                <h4 style="margin: 0 0 1rem 0; color: #374151;">📝 Function Signature</h4>
-                <input 
-                    type="text" 
-                    id="functionInput" 
-                    value="formatCurrency(amount:number,currency?:string):string"
-                    style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem; font-family: monospace; font-size: 0.9rem;"
-                    placeholder="Enter function signature..."
-                >
-                <button 
-                    onclick="generateModule()"
-                    style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #2563eb; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500;"
-                >
-                    ▶ Generate Module
-                </button>
-                <div style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
-                    <strong>Examples:</strong><br>
-                    • <a href="#" onclick="setExample('chunk<T>(array:T[],size:number):T[][]')" style="color: #2563eb; text-decoration: none;">chunk&lt;T&gt;(array:T[],size:number):T[][]</a><br>
-                    • <a href="#" onclick="setExample('validateEmail(email:string):boolean')" style="color: #2563eb; text-decoration: none;">validateEmail(email:string):boolean</a><br>
-                    • <a href="#" onclick="setExample('debounce<T>(fn:T,delay:number):T')" style="color: #2563eb; text-decoration: none;">debounce&lt;T&gt;(fn:T,delay:number):T</a>
-                </div>
+
+    <h2>📚 Interactive Examples</h2>
+
+    <!-- Tip Calculator Example -->
+    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💰 Tip Calculator with Bill Splitting</h3>
+        
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { calculateTip } from 
+  'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
+
+const result = calculateTip(85.50, 18, 4);
+// { tip: 15.39, total: 100.89, perPerson: 25.22 }</code></pre>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+            <button onclick="openDemo('tip')" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode('tip')" class="secondary-btn">Copy Code</button>
+            <button onclick="openModule('calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}')" class="view-module-btn">View Module</button>
+        </div>
+    </div>
+
+    <!-- Password Generator Example -->
+    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">🔐 Secure Password Generator</h3>
+        
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { generatePassword } from 
+  'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
+
+const result = generatePassword({ length: 16, symbols: true });
+// { password: 'K#9m$L2pQ!7vX8nR', strength: 95, feedback: ['Very strong'] }</code></pre>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+            <button onclick="openDemo('password')" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode('password')" class="secondary-btn">Copy Code</button>
+            <button onclick="openModule('generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}')" class="view-module-btn">View Module</button>
+        </div>
+    </div>
+
+    <!-- Color Palette Example -->
+    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">🎨 Color Palette Generator</h3>
+        
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { generatePalette } from 
+  'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
+
+const palette = generatePalette('#3B82F6', 5, 'complementary');
+// { colors: [{hex: '#3B82F6', name: 'Blue'}, ...], scheme: 'Complementary' }</code></pre>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+            <button onclick="openDemo('palette')" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode('palette')" class="secondary-btn">Copy Code</button>
+            <button onclick="openModule('generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}')" class="view-module-btn">View Module</button>
+        </div>
+    </div>
+
+    <!-- Minesweeper Example -->
+    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💣 Minesweeper Game Engine</h3>
+        
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createMinesweeper } from 
+  'https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}.js';
+
+const game = createMinesweeper(10, 10, 15);
+const result = game.reveal(5, 5); // 'continue', 'win', or 'lose'</code></pre>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+            <button onclick="openDemo('minesweeper')" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode('minesweeper')" class="secondary-btn">Copy Code</button>
+            <button onclick="openModule('createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}')" class="view-module-btn">View Module</button>
+        </div>
+    </div>
+
+    <!-- Expandable Demo Section (hidden by default) -->
+    <div id="demoSection" style="display: none; border: 2px solid #3b82f6; border-radius: 0.5rem; padding: 1.5rem; margin: 2rem 0; background: #fafafa;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h3 id="demoTitle" style="margin: 0; color: #374151;">Interactive Demo</h3>
+            <button onclick="closeDemo()" style="padding: 0.25rem 0.5rem; background: #ef4444; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">✕ Close</button>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem;">
+            <!-- Code Editor -->
+            <div>
+                <h4 style="margin: 0 0 0.5rem 0; color: #374151;">📝 Code Editor</h4>
+                <textarea id="codeEditor" style="width: 100%; height: 200px; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.25rem; resize: vertical;"></textarea>
+                <button onclick="runCode()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">▶ Run Code</button>
             </div>
             
-            <!-- Output Panel -->
-            <div style="border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 1rem; background: white;">
-                <h4 style="margin: 0 0 1rem 0; color: #374151;">⚡ Generated Module</h4>
-                <pre id="generatedCode" style="background: #f8fafc; padding: 0.75rem; border-radius: 0.25rem; border: 1px solid #e2e8f0; font-size: 0.8rem; line-height: 1.4; height: 120px; overflow-y: auto; margin: 0;">// Click "Generate Module" to see the code...</pre>
+            <!-- Live Preview -->
+            <div>
+                <h4 style="margin: 0 0 0.5rem 0; color: #374151;">🚀 Live Preview</h4>
+                <div id="livePreview" style="background: white; border: 1px solid #d1d5db; border-radius: 0.25rem; padding: 1rem; min-height: 200px;">
+                    Click "Try Now" on an example to see the interactive demo here.
+                </div>
             </div>
         </div>
         
-        <!-- Live Demo Panel -->
-        <div style="border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 1rem; background: white;">
-            <h4 style="margin: 0 0 1rem 0; color: #374151;">🚀 Live Demo</h4>
-            <div style="display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start;">
-                <textarea 
-                    id="demoCode" 
-                    style="font-family: monospace; width: 100%; height: 80px; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem; font-size: 0.85rem; resize: vertical;"
-                    placeholder="// Your demo code will appear here..."
-                >import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
-
-console.log(formatCurrency(1234.56, 'EUR'));
-// Output: "€1,234.56"</textarea>
-                <button 
-                    onclick="runDemo()"
-                    style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500; height: fit-content;"
-                >
-                    ▶ Run Code
-                </button>
-            </div>
-            <div id="demoOutput" style="margin-top: 1rem; padding: 0.75rem; background: #1f2937; color: #f9fafb; border-radius: 0.25rem; font-family: monospace; font-size: 0.85rem; min-height: 40px;">
-                <span style="color: #10b981;">// Output will appear here...</span>
-            </div>
+        <!-- Console Output -->
+        <div>
+            <h4 style="margin: 0 0 0.5rem 0; color: #374151;">📟 Console Output</h4>
+            <div id="consoleOutput" style="background: #1f2937; color: #f9fafb; font-family: monospace; font-size: 0.85em; padding: 0.75rem; border-radius: 0.25rem; min-height: 60px; white-space: pre-wrap;">Ready to run code...</div>
         </div>
     </div>
 
@@ -342,6 +450,296 @@ console.log(${functionName}(/* add your parameters here */));`;
         window.addEventListener('load', () => {
             setTimeout(generateModule, 500);
         });
+        
+        // Demo System Functions
+        const demoTemplates = {
+            tip: {
+                title: '💰 Tip Calculator Demo',
+                code: `import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
+
+const amount = 85.50;
+const percentage = 18;
+const people = 4;
+
+const result = calculateTip(amount, percentage, people);
+console.log(result);`,
+                preview: `
+                    <div style="padding: 1rem;">
+                        <h4 style="margin: 0 0 1rem 0;">🧮 Tip Calculator</h4>
+                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Bill Amount ($)</label>
+                                <input type="number" id="demoAmount" value="85.50" step="0.01" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Tip Percentage (%)</label>
+                                <input type="number" id="demoTip" value="18" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Number of People</label>
+                                <input type="number" id="demoPeople" value="4" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
+                            </div>
+                            <button onclick="updateTipCode()" style="padding: 0.5rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
+                        </div>
+                    </div>
+                `
+            },
+            password: {
+                title: '🔐 Password Generator Demo',
+                code: `import { generatePassword } from 'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
+
+const options = {
+    length: 16,
+    symbols: true,
+    numbers: true,
+    uppercase: true,
+    lowercase: true
+};
+
+const result = generatePassword(options);
+console.log(result);`,
+                preview: `
+                    <div style="padding: 1rem;">
+                        <h4 style="margin: 0 0 1rem 0;">🔐 Password Options</h4>
+                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Length: <span id="lengthValue">16</span></label>
+                                <input type="range" id="demoLength" min="8" max="32" value="16" style="width: 100%;" oninput="document.getElementById('lengthValue').textContent = this.value">
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
+                                    <input type="checkbox" id="demoSymbols" checked style="margin-right: 0.5rem;"> Symbols
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
+                                    <input type="checkbox" id="demoNumbers" checked style="margin-right: 0.5rem;"> Numbers
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
+                                    <input type="checkbox" id="demoUpper" checked style="margin-right: 0.5rem;"> Upper
+                                </label>
+                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
+                                    <input type="checkbox" id="demoLower" checked style="margin-right: 0.5rem;"> Lower
+                                </label>
+                            </div>
+                            <button onclick="updatePasswordCode()" style="padding: 0.5rem; background: #7c3aed; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
+                        </div>
+                    </div>
+                `
+            },
+            palette: {
+                title: '🎨 Color Palette Demo',
+                code: `import { generatePalette } from 'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
+
+const baseColor = '#3B82F6';
+const count = 5;
+const type = 'complementary';
+
+const palette = generatePalette(baseColor, count, type);
+console.log(palette);`,
+                preview: `
+                    <div style="padding: 1rem;">
+                        <h4 style="margin: 0 0 1rem 0;">🎨 Palette Options</h4>
+                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Base Color</label>
+                                <input type="color" id="demoColor" value="#3B82F6" style="width: 100%; height: 40px; border: none; border-radius: 0.25rem; cursor: pointer;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Count</label>
+                                <input type="number" id="demoCount" value="5" min="3" max="8" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Type</label>
+                                <select id="demoType" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
+                                    <option value="complementary">Complementary</option>
+                                    <option value="analogous">Analogous</option>
+                                    <option value="triadic">Triadic</option>
+                                </select>
+                            </div>
+                            <button onclick="updatePaletteCode()" style="padding: 0.5rem; background: #f59e0b; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
+                        </div>
+                    </div>
+                `
+            },
+            minesweeper: {
+                title: '💣 Minesweeper Demo',
+                code: `import { createMinesweeper } from 'https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}.js';
+
+const width = 10;
+const height = 10;
+const mines = 15;
+
+const game = createMinesweeper(width, height, mines);
+
+// Try revealing a cell
+const result = game.reveal(5, 5);
+console.log('Reveal result:', result);
+
+// Check game state
+console.log('Game state:', game.getState());`,
+                preview: `
+                    <div style="padding: 1rem;">
+                        <h4 style="margin: 0 0 1rem 0;">💣 Game Options</h4>
+                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Board Size</label>
+                                <select id="demoBoardSize" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
+                                    <option value="8x8x10">8×8 (10 mines)</option>
+                                    <option value="10x10x15" selected>10×10 (15 mines)</option>
+                                    <option value="12x12x20">12×12 (20 mines)</option>
+                                </select>
+                            </div>
+                            <button onclick="updateMinesweeperCode()" style="padding: 0.5rem; background: #ef4444; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
+                            <div style="font-size: 0.8em; color: #6b7280; text-align: center;">
+                                Creates a game object with methods to reveal cells, flag mines, and check game state.
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+        
+        function openDemo(type) {
+            const demo = demoTemplates[type];
+            if (!demo) return;
+            
+            document.getElementById('demoSection').style.display = 'block';
+            document.getElementById('demoTitle').textContent = demo.title;
+            document.getElementById('codeEditor').value = demo.code;
+            document.getElementById('livePreview').innerHTML = demo.preview;
+            document.getElementById('consoleOutput').textContent = 'Ready to run code...';
+            
+            // Scroll to demo section
+            document.getElementById('demoSection').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function closeDemo() {
+            document.getElementById('demoSection').style.display = 'none';
+        }
+        
+        async function runCode() {
+            const code = document.getElementById('codeEditor').value;
+            const consoleOutput = document.getElementById('consoleOutput');
+            
+            try {
+                consoleOutput.textContent = 'Running code...\n';
+                
+                // Create a function that captures console.log
+                const logs = [];
+                const originalConsoleLog = console.log;
+                console.log = (...args) => {
+                    logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' '));
+                    originalConsoleLog(...args);
+                };
+                
+                // Execute the code
+                await eval(`(async () => { ${code} })()`);
+                
+                // Restore console.log
+                console.log = originalConsoleLog;
+                
+                consoleOutput.textContent = logs.length > 0 ? logs.join('\n') : 'Code executed successfully (no output)';
+            } catch (error) {
+                consoleOutput.textContent = `Error: ${error.message}`;
+            }
+        }
+        
+        // Update functions for interactive previews
+        function updateTipCode() {
+            const amount = document.getElementById('demoAmount').value;
+            const tip = document.getElementById('demoTip').value;
+            const people = document.getElementById('demoPeople').value;
+            
+            const newCode = `import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
+
+const amount = ${amount};
+const percentage = ${tip};
+const people = ${people};
+
+const result = calculateTip(amount, percentage, people);
+console.log(result);`;
+            
+            document.getElementById('codeEditor').value = newCode;
+        }
+        
+        function updatePasswordCode() {
+            const length = document.getElementById('demoLength').value;
+            const symbols = document.getElementById('demoSymbols').checked;
+            const numbers = document.getElementById('demoNumbers').checked;
+            const uppercase = document.getElementById('demoUpper').checked;
+            const lowercase = document.getElementById('demoLower').checked;
+            
+            const newCode = `import { generatePassword } from 'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
+
+const options = {
+    length: ${length},
+    symbols: ${symbols},
+    numbers: ${numbers},
+    uppercase: ${uppercase},
+    lowercase: ${lowercase}
+};
+
+const result = generatePassword(options);
+console.log(result);`;
+            
+            document.getElementById('codeEditor').value = newCode;
+        }
+        
+        function updatePaletteCode() {
+            const color = document.getElementById('demoColor').value;
+            const count = document.getElementById('demoCount').value;
+            const type = document.getElementById('demoType').value;
+            
+            const newCode = `import { generatePalette } from 'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
+
+const baseColor = '${color}';
+const count = ${count};
+const type = '${type}';
+
+const palette = generatePalette(baseColor, count, type);
+console.log(palette);`;
+            
+            document.getElementById('codeEditor').value = newCode;
+        }
+        
+        function updateMinesweeperCode() {
+            const boardConfig = document.getElementById('demoBoardSize').value;
+            const [width, height, mines] = boardConfig.split('x').map(n => parseInt(n));
+            
+            const newCode = `import { createMinesweeper } from 'https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}.js';
+
+const width = ${width};
+const height = ${height};
+const mines = ${mines};
+
+const game = createMinesweeper(width, height, mines);
+
+// Try revealing a cell
+const result = game.reveal(5, 5);
+console.log('Reveal result:', result);
+
+// Check game state
+console.log('Game state:', game.getState());`;
+            
+            document.getElementById('codeEditor').value = newCode;
+        }
+        
+        // Utility functions
+        function copyCode(type) {
+            const demo = demoTemplates[type];
+            if (demo) {
+                navigator.clipboard.writeText(demo.code).then(() => {
+                    // Show a brief success message
+                    const event = new CustomEvent('show-toast', { detail: { message: 'Code copied to clipboard!' } });
+                    window.dispatchEvent(event);
+                });
+            }
+        }
+        
+        function openModule(signature) {
+            const encodedSignature = encodeURIComponent(signature);
+            const url = `/esm/${encodedSignature}.js`;
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
