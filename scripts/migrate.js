@@ -16,10 +16,17 @@ async function migrate() {
       CREATE TABLE IF NOT EXISTS module_cache (
         id SERIAL PRIMARY KEY,
         prompt_hash VARCHAR(64) UNIQUE NOT NULL,
+        prompt_text TEXT NOT NULL,
         query_params JSONB,
         module_content TEXT NOT NULL,
         created_at TIMESTAMP DEFAULT NOW()
       );
+    `)
+
+    // Add prompt_text column if it doesn't exist (for existing databases)
+    await client.query(`
+      ALTER TABLE module_cache 
+      ADD COLUMN IF NOT EXISTS prompt_text TEXT;
     `)
 
     // Create index

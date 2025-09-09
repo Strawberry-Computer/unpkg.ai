@@ -43,12 +43,13 @@ export const cache = {
       const pool = getPool()
       
       await pool.query(
-        `INSERT INTO module_cache (prompt_hash, query_params, module_content, created_at) 
-         VALUES ($1, $2, $3, NOW()) 
+        `INSERT INTO module_cache (prompt_hash, prompt_text, query_params, module_content, created_at) 
+         VALUES ($1, $2, $3, $4, NOW()) 
          ON CONFLICT (prompt_hash) DO UPDATE SET 
          module_content = EXCLUDED.module_content,
-         query_params = EXCLUDED.query_params`,
-        [hash, JSON.stringify(queryParams), moduleContent]
+         query_params = EXCLUDED.query_params,
+         prompt_text = EXCLUDED.prompt_text`,
+        [hash, prompt, JSON.stringify(queryParams), moduleContent]
       )
       
       return true
