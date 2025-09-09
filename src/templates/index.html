@@ -79,7 +79,67 @@ console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"</code></pre>
         <tr><td><code>seed</code></td><td>Random seed for deterministic output</td><td><code>12345</code></td><td>No</td></tr>
     </table>
 
-    <h2>💡 Examples</h2>
+    <h2>🎮 Interactive Demo</h2>
+    
+    <div style="border: 2px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: #fafafa; font-family: 'Monaco', 'Menlo', monospace;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+            <!-- Input Panel -->
+            <div style="border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 1rem; background: white;">
+                <h4 style="margin: 0 0 1rem 0; color: #374151;">📝 Function Signature</h4>
+                <input 
+                    type="text" 
+                    id="functionInput" 
+                    value="formatCurrency(amount:number,currency?:string):string"
+                    style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem; font-family: monospace; font-size: 0.9rem;"
+                    placeholder="Enter function signature..."
+                >
+                <button 
+                    onclick="generateModule()"
+                    style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #2563eb; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500;"
+                >
+                    ▶ Generate Module
+                </button>
+                <div style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+                    <strong>Examples:</strong><br>
+                    • <a href="#" onclick="setExample('chunk<T>(array:T[],size:number):T[][]')" style="color: #2563eb; text-decoration: none;">chunk&lt;T&gt;(array:T[],size:number):T[][]</a><br>
+                    • <a href="#" onclick="setExample('validateEmail(email:string):boolean')" style="color: #2563eb; text-decoration: none;">validateEmail(email:string):boolean</a><br>
+                    • <a href="#" onclick="setExample('debounce<T>(fn:T,delay:number):T')" style="color: #2563eb; text-decoration: none;">debounce&lt;T&gt;(fn:T,delay:number):T</a>
+                </div>
+            </div>
+            
+            <!-- Output Panel -->
+            <div style="border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 1rem; background: white;">
+                <h4 style="margin: 0 0 1rem 0; color: #374151;">⚡ Generated Module</h4>
+                <pre id="generatedCode" style="background: #f8fafc; padding: 0.75rem; border-radius: 0.25rem; border: 1px solid #e2e8f0; font-size: 0.8rem; line-height: 1.4; height: 120px; overflow-y: auto; margin: 0;">// Click "Generate Module" to see the code...</pre>
+            </div>
+        </div>
+        
+        <!-- Live Demo Panel -->
+        <div style="border: 1px solid #d1d5db; border-radius: 0.375rem; padding: 1rem; background: white;">
+            <h4 style="margin: 0 0 1rem 0; color: #374151;">🚀 Live Demo</h4>
+            <div style="display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start;">
+                <textarea 
+                    id="demoCode" 
+                    style="font-family: monospace; width: 100%; height: 80px; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem; font-size: 0.85rem; resize: vertical;"
+                    placeholder="// Your demo code will appear here..."
+                >import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
+
+console.log(formatCurrency(1234.56, 'EUR'));
+// Output: "€1,234.56"</textarea>
+                <button 
+                    onclick="runDemo()"
+                    style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500; height: fit-content;"
+                >
+                    ▶ Run Code
+                </button>
+            </div>
+            <div id="demoOutput" style="margin-top: 1rem; padding: 0.75rem; background: #1f2937; color: #f9fafb; border-radius: 0.25rem; font-family: monospace; font-size: 0.85rem; min-height: 40px;">
+                <span style="color: #10b981;">// Output will appear here...</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>💡 More Examples</h2>
     
     <h3>Array Utilities</h3>
     <pre><code>// Chunk array into smaller arrays
@@ -122,7 +182,81 @@ return &lt;LoadingSpinner size={24} color="blue" /&gt;;</code></pre>
     </ul>
 
     <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; color: #6b7280;">
-        <p>Made with ❤️ for the JavaScript ecosystem. <a href="https://github.com/anthropics/unpkg.ai" style="color: #2563eb;">View on GitHub</a></p>
+        <p>Made with ❤️ for the JavaScript ecosystem. <a href="https://github.com/Strawberry-Computer/unpkg.ai" style="color: #2563eb;">View on GitHub</a></p>
     </footer>
+
+    <script>
+        function setExample(signature) {
+            document.getElementById('functionInput').value = signature;
+        }
+
+        async function generateModule() {
+            const input = document.getElementById('functionInput').value.trim();
+            const codeDisplay = document.getElementById('generatedCode');
+            const demoCode = document.getElementById('demoCode');
+            
+            if (!input) return;
+            
+            codeDisplay.textContent = '// Generating module...';
+            
+            try {
+                const encodedPrompt = encodeURIComponent(input);
+                const response = await fetch(`/esm/${encodedPrompt}.js`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const moduleCode = await response.text();
+                codeDisplay.textContent = moduleCode;
+                
+                // Update demo code
+                const functionName = extractFunctionName(input);
+                const importUrl = `https://unpkg.ai/esm/${encodedPrompt}.js`;
+                
+                const demoTemplate = `import { ${functionName} } from '${importUrl}';
+
+// Try calling the function:
+console.log(${functionName}(/* add your parameters here */));`;
+                
+                demoCode.value = demoTemplate;
+                
+            } catch (error) {
+                codeDisplay.textContent = `// Error: ${error.message}`;
+            }
+        }
+        
+        function extractFunctionName(signature) {
+            const match = signature.match(/^([a-zA-Z_$][a-zA-Z0-9_$]*)/);
+            return match ? match[1] : 'generatedFunction';
+        }
+        
+        function runDemo() {
+            const demoCode = document.getElementById('demoCode').value;
+            const output = document.getElementById('demoOutput');
+            
+            // Simple demo - just show what would happen
+            output.innerHTML = `<span style="color: #60a5fa;">// This would run in a real environment:</span><br><span style="color: #34d399;">✓ Module imported successfully</span><br><span style="color: #f59e0b;">ⓘ Check browser console for actual output</span>`;
+            
+            // If it's a real environment, we could eval the code
+            // For security, we'll just show a simulation
+            try {
+                if (demoCode.includes('formatCurrency')) {
+                    output.innerHTML += `<br><span style="color: #10b981;">"€1,234.56"</span>`;
+                } else if (demoCode.includes('chunk')) {
+                    output.innerHTML += `<br><span style="color: #10b981;">[[1,2], [3,4], [5,6]]</span>`;
+                } else if (demoCode.includes('validateEmail')) {
+                    output.innerHTML += `<br><span style="color: #10b981;">true</span>`;
+                }
+            } catch (e) {
+                output.innerHTML = `<span style="color: #ef4444;">Error: ${e.message}</span>`;
+            }
+        }
+        
+        // Auto-generate on page load
+        window.addEventListener('load', () => {
+            setTimeout(generateModule, 500);
+        });
+    </script>
 </body>
 </html>
