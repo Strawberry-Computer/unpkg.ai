@@ -200,17 +200,6 @@ npm run dev      # Development
 npm start        # Production
 ```
 
-## TypeScript Integration
-
-Generated modules work seamlessly with TypeScript through JSDoc:
-
-```typescript
-import { fetchUser } from 'https://unpkg.ai/esm/fetchUser(userId:number):Promise<User>.js';
-
-// Full type safety inferred from JSDoc
-const user = await fetchUser(123);
-//    ^? Promise<User>
-```
 
 ## Caching Strategy
 
