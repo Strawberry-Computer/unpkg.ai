@@ -1,6 +1,11 @@
+import { createDebugger } from './debug.js'
+
+const debug = createDebugger('pollinations')
+
 export const pollinations = {
   async generate(prompt, options = {}) {
     const { model = 'openai', seed = null } = options
+    debug('API request with model:', model, 'seed:', seed)
     
     try {
       // Build URL with prompt and optional query parameters
@@ -26,6 +31,11 @@ export const pollinations = {
       }
       
       const result = await response.text()
+      
+      debug('Raw API response length:', result.length)
+      debug('Response starts with export?', result.trim().startsWith('export'))
+      debug('Raw API response:', result)
+      
       return result
       
     } catch (error) {

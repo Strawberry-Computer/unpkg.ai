@@ -1,4 +1,7 @@
 import { pollinations } from './pollinations.js'
+import { createDebugger } from './debug.js'
+
+const debug = createDebugger('generator')
 
 const SYSTEM_PROMPT = `<instructions>
 You are a JavaScript module generator. Given a function signature or description, generate a complete ES module.
@@ -47,22 +50,19 @@ export const generator = {
   async generate(prompt, queryParams = {}) {
     try {
       const fullPrompt = `${SYSTEM_PROMPT}\n\n${prompt}`
+      debug('Generating for prompt:', prompt)
+      debug('Full prompt length:', fullPrompt.length)
       
       const response = await pollinations.generate(fullPrompt, queryParams)
+      debug('Got response from API, length:', response.length)
       
-      // Basic validation - ensure it starts with export
-      if (!response.trim().startsWith('export')) {
-        throw new Error('Generated module does not start with export')
-      }
+      debug('Module generation successful')
       
       return response.trim()
       
     } catch (error) {
-      console.error('Generator error:', error)
-      
-      // Fallback - generate a basic stub
-      const functionName = extractFunctionName(prompt)
-      return generateFallback(functionName, prompt)
+      debug('Generator error:', error.message)
+      throw error
     }
   }
 }

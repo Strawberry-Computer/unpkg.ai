@@ -5,6 +5,9 @@ import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
 import { generator } from './generator.js'
 import { cache } from './cache.js'
+import { createDebugger } from './debug.js'
+
+const debug = createDebugger('server')
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -46,21 +49,26 @@ app.get('/esm/:prompt', async (c) => {
     const seed = c.req.query('seed') || null
     
     const queryParams = { model, seed }
+    debug('Request for prompt:', prompt)
+    debug('Query params:', queryParams)
     
     // Check cache first
     const cached = await cache.get(prompt, queryParams)
     if (cached) {
+      debug('Cache hit - serving from cache')
       return c.text(cached, 200, {
         'Content-Type': 'application/javascript',
         'Cache-Control': 'public, max-age=31536000'
       })
     }
     
+    debug('Cache miss - generating new module')
     // Generate new module
     const moduleContent = await generator.generate(prompt, queryParams)
     
     // Cache the result
     await cache.set(prompt, queryParams, moduleContent)
+    debug('Module generated and cached')
     
     return c.text(moduleContent, 200, {
       'Content-Type': 'application/javascript',
