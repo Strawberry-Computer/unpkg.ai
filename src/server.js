@@ -42,7 +42,7 @@ app.get('/esm/:prompt', async (c) => {
     const prompt = decodeURIComponent(cleanPrompt)
     
     // Extract query parameters
-    const model = c.req.query('model') || 'gpt-4'
+    const model = c.req.query('model') || 'openai'
     const seed = c.req.query('seed') || null
     
     const queryParams = { model, seed }
