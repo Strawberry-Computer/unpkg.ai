@@ -25,5 +25,5 @@ services:
 
 databases:
   - name: unpkg-cache-db
-    plan: starter
+    plan: free
     databaseName: unpkg_cache
