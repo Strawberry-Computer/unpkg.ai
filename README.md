@@ -171,7 +171,7 @@ src/
 ```bash
 POLLINATIONS_API_KEY=your_api_key_here
 PORT=3000
-DATABASE_URL=postgresql://user:pass@localhost:5432/unpkg_cache
+PG_URL=postgresql://user:pass@localhost:5432/unpkg_cache
 CACHE_TTL=3600
 NODE_ENV=production
 ```

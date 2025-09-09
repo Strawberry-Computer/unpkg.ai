@@ -1,0 +1,25 @@
+{
+  "name": "unpkg-ai",
+  "version": "1.0.0",
+  "description": "AI-powered ESM module generation service",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "migrate": "node scripts/migrate.js",
+    "test": "node test/index.js"
+  },
+  "dependencies": {
+    "hono": "^4.6.3",
+    "@hono/node-server": "^1.12.2",
+    "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.6",
+    "tape": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
