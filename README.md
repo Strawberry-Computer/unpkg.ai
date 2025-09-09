@@ -28,42 +28,47 @@ GET /esm/{url-encoded-prompt}.js?model={model}&seed={seed}
 ## Examples
 
 ### Currency formatter with full typedef
+**Request:** [https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js](https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js)
+
 ```javascript
-// Request: https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js
 import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
 
 console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"
 ```
 
 ### User fetcher with complex types
+**Request:** [https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js](https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js)
+
 ```javascript
-// Request: https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js
 import { fetchUser } from 'https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js';
 
 const user = await fetchUser(123, { includeProfile: true, timeout: 5000 });
 ```
 
 ### React component with typed props
+**Request:** [https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js](https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js)
+
 ```javascript
-// Request: https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js
 import { LoadingSpinner } from 'https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js';
 
 return <LoadingSpinner size={24} color="blue" isVisible={loading} />;
 ```
 
-### Generic array utilities
+### Array utilities
+**Request:** [https://unpkg.ai/esm/chunk(array,size):array.js](https://unpkg.ai/esm/chunk(array,size):array.js)
+
 ```javascript
-// Request: https://unpkg.ai/esm/chunk<T>(array:T[],size:number):T[][].js
-import { chunk } from 'https://unpkg.ai/esm/chunk<T>(array:T[],size:number):T[][].js';
+import { chunk } from 'https://unpkg.ai/esm/chunk(array,size):array.js';
 
 const numbers = [1, 2, 3, 4, 5, 6];
 const chunked = chunk(numbers, 2); // [[1, 2], [3, 4], [5, 6]]
 ```
 
-### API client with interface
+### API client
+**Request:** [https://unpkg.ai/esm/createApiClient(config):object.js](https://unpkg.ai/esm/createApiClient(config):object.js)
+
 ```javascript
-// Request: https://unpkg.ai/esm/createApiClient(config:{baseUrl:string,apiKey:string,timeout%3F:number}):{get<T>(path:string):Promise<T>,post<T>(path:string,data:any):Promise<T>}.js
-import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config:{baseUrl:string,apiKey:string,timeout%3F:number}):{get<T>(path:string):Promise<T>,post<T>(path:string,data:any):Promise<T>}.js';
+import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config):object.js';
 
 const api = createApiClient({ 
   baseUrl: 'https://api.example.com', 
@@ -71,21 +76,6 @@ const api = createApiClient({
 });
 ```
 
-### With descriptive names requiring spaces
-```javascript
-// Request: https://unpkg.ai/esm/validate+email+address(email:string):boolean.js
-import { validateEmailAddress } from 'https://unpkg.ai/esm/validate+email+address(email:string):boolean.js';
-
-console.log(validateEmailAddress('test@example.com')); // true
-```
-
-### Event emitter with typed events
-```javascript
-// Request: https://unpkg.ai/esm/createEventEmitter<T+extends+Record<string,any>>():{on<K+extends+keyof+T>(event:K,handler:(data:T[K])=>void):void,emit<K+extends+keyof+T>(event:K,data:T[K]):void}.js
-import { createEventEmitter } from 'https://unpkg.ai/esm/createEventEmitter<T+extends+Record<string,any>>():{on<K+extends+keyof+T>(event:K,handler:(data:T[K])=>void):void,emit<K+extends+keyof+T>(event:K,data:T[K]):void}.js';
-
-const emitter = createEventEmitter();
-```
 
 ## API Response Format
 
@@ -121,19 +111,14 @@ export async function fetchUser(userId, options = {}) {
 
 ### Function Signatures
 ```
-functionName(param1:type1,param2%3F:type2):ReturnType
+functionName(param1:type1,param2?:type2):ReturnType
 ```
 
 ### Object Types
 ```
-{property1:type1,property2%3F:type2}
+{property1:type1,property2?:type2}
 ```
 
-### Generic Types
-```
-functionName<T>(param:T[]):T[]
-functionName<T+extends+SomeType>(param:T):T
-```
 
 ### Union Types
 ```
@@ -142,14 +127,10 @@ functionName<T+extends+SomeType>(param:T):T
 
 ### Array Types
 ```
-param:string[]
-param:Array<{id:number,name:string}>
+param:array
+param:{foo:string,bar:number}[]
 ```
 
-### When to use `+` for spaces
-- Multi-word function names: `validate+email+address`
-- Generic constraints: `T+extends+Record`
-- Complex type descriptions: `user+data+fetcher`
 
 ## API Endpoints
 
