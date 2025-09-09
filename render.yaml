@@ -7,7 +7,6 @@ services:
     startCommand: npm start
     domains:
       - unpkg.ai
-      - www.unpkg.ai
     envVars:
       - key: NODE_ENV
         value: production
