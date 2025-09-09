@@ -1,9 +1,29 @@
 import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
+import { readFileSync } from 'fs'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
 import { generator } from './generator.js'
 import { cache } from './cache.js'
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
 const app = new Hono()
+
+// Root endpoint with HTML usage instructions
+app.get('/', (c) => {
+  const htmlContent = readFileSync(join(__dirname, 'templates', 'index.html'), 'utf-8')
+  return c.html(htmlContent)
+})
+
+// LLMs.txt endpoint
+app.get('/llms.txt', (c) => {
+  const txtContent = readFileSync(join(__dirname, 'templates', 'llms.txt'), 'utf-8')
+  return c.text(txtContent, 200, {
+    'Content-Type': 'text/plain; charset=utf-8'
+  })
+})
 
 // Health check
 app.get('/health', (c) => {

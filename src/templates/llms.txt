@@ -1,0 +1,83 @@
+# unpkg.ai - AI-powered ESM module generation service
+
+## Overview
+unpkg.ai generates and serves ES modules dynamically based on URL-encoded prompts. Include full TypeScript-style type definitions in your prompts to get modules with precise JSDoc annotations.
+
+## API Endpoints
+
+### Generate ES Module
+GET /esm/{url-encoded-prompt}.js
+
+Parameters:
+- model: AI model to use (optional, default: gpt-4)
+- seed: Random seed for deterministic output (optional)
+
+### Health Check
+GET /health
+
+### LLM Documentation
+GET /llms.txt
+
+## Prompt Syntax
+
+### Function Signatures
+functionName(param1:type1,param2%3F:type2):ReturnType
+
+### Object Types
+{property1:type1,property2%3F:type2}
+
+### Generic Types
+functionName<T>(param:T[]):T[]
+functionName<T+extends+SomeType>(param:T):T
+
+### Union Types
+(param:string|number):boolean
+
+### Array Types
+param:string[]
+param:Array<{id:number,name:string}>
+
+### Special Characters
+- Use %3F for optional parameters (?)
+- Use + for spaces in multi-word names
+- Use standard URL encoding for special characters
+
+## Examples
+
+### Basic Function
+https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js
+
+### Generic Function
+https://unpkg.ai/esm/chunk<T>(array:T[],size:number):T[][].js
+
+### Complex API Client
+https://unpkg.ai/esm/createApiClient(config:{baseUrl:string,apiKey:string}):{get<T>(path:string):Promise<T>,post<T>(path:string,data:any):Promise<T>}.js
+
+### React Component
+https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js
+
+### Multi-word Function Names
+https://unpkg.ai/esm/validate+email+address(email:string):boolean.js
+
+## Usage in Code
+
+```javascript
+import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
+console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"
+```
+
+## Features
+- Permanent caching - Generated modules cached indefinitely
+- TypeScript integration via JSDoc annotations
+- CDN-ready with long cache headers
+- Support for complex type signatures
+- Deterministic output with seed parameter
+
+## Response Format
+Generated modules include precise JSDoc type annotations based on the TypeScript-style signatures in the prompt.
+
+## Architecture
+- Express/Hono server with /esm/* routing
+- Module generation with TypeScript signature parsing
+- Pollinations.ai API integration
+- PostgreSQL caching layer

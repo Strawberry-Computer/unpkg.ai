@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>unpkg.ai - AI-powered ESM modules</title>
+    <style>
+        body { 
+            font-family: system-ui, -apple-system, sans-serif; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 2rem; 
+            line-height: 1.6; 
+            color: #333;
+        }
+        h1 { color: #2563eb; border-bottom: 3px solid #dbeafe; padding-bottom: 0.5rem; }
+        h2 { color: #1e40af; margin-top: 2rem; }
+        pre { 
+            background: #f8fafc; 
+            padding: 1rem; 
+            border-radius: 0.5rem; 
+            border-left: 4px solid #2563eb;
+            overflow-x: auto;
+        }
+        code { 
+            background: #e2e8f0; 
+            padding: 0.2rem 0.4rem; 
+            border-radius: 0.25rem; 
+            font-size: 0.9em;
+        }
+        .endpoint { 
+            background: #ecfdf5; 
+            padding: 1rem; 
+            border-radius: 0.5rem; 
+            border-left: 4px solid #10b981; 
+            margin: 1rem 0;
+        }
+        .example { 
+            background: #fef3c7; 
+            padding: 1rem; 
+            border-radius: 0.5rem; 
+            margin: 1rem 0;
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 1rem 0;
+        }
+        th, td { 
+            border: 1px solid #d1d5db; 
+            padding: 0.75rem; 
+            text-align: left;
+        }
+        th { background: #f9fafb; font-weight: 600; }
+        .highlight { background: #fef3c7; padding: 0.1rem 0.3rem; border-radius: 0.25rem; }
+    </style>
+</head>
+<body>
+    <h1>🚀 unpkg.ai</h1>
+    <p><strong>AI-powered ESM module generation service</strong> that creates JavaScript modules on-demand using AI.</p>
+
+    <h2>📋 Quick Start</h2>
+    <div class="endpoint">
+        <strong>GET</strong> <code>/esm/{url-encoded-prompt}.js</code>
+    </div>
+    
+    <div class="example">
+        <h3>Example Request:</h3>
+        <pre><code>https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js</code></pre>
+        <h3>Usage in your code:</h3>
+        <pre><code>import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
+console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"</code></pre>
+    </div>
+
+    <h2>🔧 Parameters</h2>
+    <table>
+        <tr><th>Parameter</th><th>Description</th><th>Example</th><th>Required</th></tr>
+        <tr><td><code>model</code></td><td>AI model to use</td><td><code>gpt-4</code>, <code>claude-3</code></td><td>No</td></tr>
+        <tr><td><code>seed</code></td><td>Random seed for deterministic output</td><td><code>12345</code></td><td>No</td></tr>
+    </table>
+
+    <h2>💡 Examples</h2>
+    
+    <h3>Array Utilities</h3>
+    <pre><code>// Chunk array into smaller arrays
+import { chunk } from 'https://unpkg.ai/esm/chunk<T>(array:T[],size:number):T[][].js';
+const chunked = chunk([1,2,3,4,5,6], 2); // [[1,2], [3,4], [5,6]]</code></pre>
+
+    <h3>API Client</h3>
+    <pre><code>// Create typed API client
+import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config:{baseUrl:string,apiKey:string}):{get<T>(path:string):Promise<T>}.js';
+const api = createApiClient({ baseUrl: 'https://api.example.com', apiKey: 'key123' });</code></pre>
+
+    <h3>React Components</h3>
+    <pre><code>// Generate React components with typed props
+import { LoadingSpinner } from 'https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string}):JSX.Element.js';
+return &lt;LoadingSpinner size={24} color="blue" /&gt;;</code></pre>
+
+    <h2>🎯 Prompt Syntax</h2>
+    <ul>
+        <li><span class="highlight">Functions:</span> <code>functionName(param1:type1,param2%3F:type2):ReturnType</code></li>
+        <li><span class="highlight">Objects:</span> <code>{property1:type1,property2%3F:type2}</code></li>
+        <li><span class="highlight">Generics:</span> <code>functionName&lt;T&gt;(param:T[]):T[]</code></li>
+        <li><span class="highlight">Spaces:</span> Use <code>+</code> for multi-word names: <code>validate+email+address</code></li>
+        <li><span class="highlight">Optional:</span> Use <code>%3F</code> for optional params: <code>param%3F:string</code></li>
+    </ul>
+
+    <h2>🔗 API Endpoints</h2>
+    <ul>
+        <li><code>GET /esm/{prompt}.js</code> - Generate ES module</li>
+        <li><code>GET /health</code> - Health check</li>
+        <li><code>GET /llms.txt</code> - LLM-friendly documentation</li>
+    </ul>
+
+    <h2>✨ Features</h2>
+    <ul>
+        <li>🔄 <strong>Permanent caching</strong> - Generated modules cached forever</li>
+        <li>📝 <strong>TypeScript integration</strong> - Full JSDoc type annotations</li>
+        <li>🎯 <strong>Precise signatures</strong> - Include TypeScript-style types for exact output</li>
+        <li>⚡ <strong>Instant delivery</strong> - Cached modules served instantly</li>
+        <li>🌐 <strong>CDN-ready</strong> - Long cache headers for optimal performance</li>
+    </ul>
+
+    <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; color: #6b7280;">
+        <p>Made with ❤️ for the JavaScript ecosystem. <a href="https://github.com/anthropics/unpkg.ai" style="color: #2563eb;">View on GitHub</a></p>
+    </footer>
+</body>
+</html>
