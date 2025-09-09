@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: unpkg-ai
+    env: node
+    plan: starter
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        fromService:
+          type: web
+          name: unpkg-ai
+          property: port
+      - key: POLLINATIONS_API_KEY
+        sync: false
+      - key: PG_URL
+        fromDatabase:
+          name: unpkg-cache-db
+          property: connectionString
+      - key: CACHE_TTL
+        value: "3600"
+    healthCheckPath: /health
+
+databases:
+  - name: unpkg-cache-db
+    plan: starter
+    databaseName: unpkg_cache
