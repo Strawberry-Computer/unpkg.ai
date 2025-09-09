@@ -1,4 +1,5 @@
 import { Hono } from 'hono'
+import { cors } from 'hono/cors'
 import { serve } from '@hono/node-server'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
@@ -13,6 +14,13 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const app = new Hono()
+
+// Enable CORS for all origins
+app.use('*', cors({
+  origin: '*',
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowHeaders: ['Content-Type', 'Authorization'],
+}))
 
 // Root endpoint with HTML usage instructions
 app.get('/', (c) => {
