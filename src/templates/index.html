@@ -148,6 +148,23 @@ console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"</code></pre>
 
     <h2>📚 Interactive Examples</h2>
 
+    <!-- Format Currency Example -->
+    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💱 Currency Formatter</h3>
+        
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { formatCurrency } from 
+  'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
+
+const formatted = formatCurrency(1234.56, 'EUR');
+// "€1,234.56"</code></pre>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+            <button onclick="openDemo('currency')" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode('currency')" class="secondary-btn">Copy Code</button>
+            <button onclick="openModule('formatCurrency(amount:number,currency%3F:string):string')" class="view-module-btn">View Module</button>
+        </div>
+    </div>
+
     <!-- Tip Calculator Example -->
     <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💰 Tip Calculator with Bill Splitting</h3>
@@ -217,6 +234,48 @@ game.start(); // Full game with click handlers, animations, timer, score trackin
         </div>
     </div>
 
+    <!-- Rich Text Editor Example -->
+    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">📝 Rich Text Editor</h3>
+        
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createRichEditor } from 
+  'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}.js';
+
+const editor = createRichEditor({
+  container: '#editor',
+  features: ['bold', 'italic', 'lists', 'links']
+});
+editor.setContent('# Welcome\n\nStart typing...');</code></pre>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+            <button onclick="openDemo('editor')" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode('editor')" class="secondary-btn">Copy Code</button>
+            <button onclick="openModule('createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}')" class="view-module-btn">View Module</button>
+        </div>
+    </div>
+
+    <!-- Dashboard Example -->
+    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">📊 Interactive Data Dashboard</h3>
+        
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createDashboard } from 
+  'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}.js';
+
+const dashboard = createDashboard({
+  container: '#dashboard',
+  layout: 'grid'
+});
+dashboard.addChart('sales', 'line', [
+  { x: 'Jan', y: 1000 }, { x: 'Feb', y: 1200 }
+]);</code></pre>
+
+        <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
+            <button onclick="openDemo('dashboard')" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode('dashboard')" class="secondary-btn">Copy Code</button>
+            <button onclick="openModule('createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}')" class="view-module-btn">View Module</button>
+        </div>
+    </div>
+
     <!-- Expandable Demo Section (hidden by default) -->
     <div id="demoSection" style="display: none; border: 2px solid #3b82f6; border-radius: 0.5rem; padding: 1.5rem; margin: 2rem 0; background: #fafafa;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
@@ -250,107 +309,10 @@ game.start(); // Full game with click handlers, animations, timer, score trackin
         </div>
     </div>
 
-    <h2>💡 More Examples</h2>
-    
-    <h3>Array Utilities</h3>
-    <pre><code>// Chunk array into smaller arrays
-import { chunk } from 'https://unpkg.ai/esm/chunk(array,size):array.js';
-const numbers = [1, 2, 3, 4, 5, 6];
-const chunked = chunk(numbers, 2); // [[1, 2], [3, 4], [5, 6]]</code></pre>
 
-    <h3>User Fetcher with Complex Types</h3>
-    <pre><code>// Fetch user with typed options
-import { fetchUser } from 'https://unpkg.ai/esm/fetchUser(userId:number,options%3F:{includeProfile%3F:boolean,timeout%3F:number}):Promise<{id:number,name:string,email:string,createdAt:Date}>.js';
-const user = await fetchUser(123, { includeProfile: true, timeout: 5000 });</code></pre>
 
-    <h3>API Client</h3>
-    <pre><code>// Create API client
-import { createApiClient } from 'https://unpkg.ai/esm/createApiClient(config):object.js';
-const api = createApiClient({ 
-  baseUrl: 'https://api.example.com', 
-  apiKey: 'key123' 
-});</code></pre>
 
-    <h3>React Components</h3>
-    <pre><code>// Generate React components with typed props
-import { LoadingSpinner } from 'https://unpkg.ai/esm/LoadingSpinner(props:{size:number,color:string,isVisible:boolean}):JSX.Element.js';
-return &lt;LoadingSpinner size={24} color="blue" isVisible={loading} /&gt;;</code></pre>
 
-    <h2>🎨 Complex Frontend Examples</h2>
-    
-    <h3>Advanced Form Validator</h3>
-    <pre><code>// Real-time form validation with async validators
-import { createFormValidator } from 'https://unpkg.ai/esm/createFormValidator(config:{fields:{[key:string]:{required%3F:boolean,minLength%3F:number,pattern%3F:RegExp,validator%3F:(value:string)=>Promise<boolean>}},realTime%3F:boolean}):Promise<{validate:(formData:FormData)=>Promise<{isValid:boolean,errors:{[field:string]:string[]}}>,attachToForm:(form:HTMLFormElement)=>void,onFieldChange:(callback:(field:string,isValid:boolean,errors:string[])=>void)=>void}>.js';
-
-const validator = await createFormValidator({
-  fields: {
-    email: { required: true, pattern: /^[^@]+@[^@]+\.[^@]+$/ },
-    username: { required: true, minLength: 3, validator: async (val) => {
-      const response = await fetch(`/api/check-username/${val}`);
-      return response.ok;
-    }},
-    password: { required: true, minLength: 8 }
-  },
-  realTime: true
-});
-
-const form = document.getElementById('signupForm');
-validator.attachToForm(form);</code></pre>
-
-    <h3>Drag & Drop File Uploader</h3>
-    <pre><code>// Modern file uploader with progress tracking
-import { createFileUploader } from 'https://unpkg.ai/esm/createFileUploader(config:{endpoint:string,maxFileSize%3F:number,allowedTypes%3F:string[],multiple%3F:boolean,chunkSize%3F:number}):Promise<{attachTo:(element:HTMLElement)=>void,upload:(files:FileList)=>Promise<{success:boolean,results:{file:string,url%3F:string,error%3F:string}[]}>,onProgress:(callback:(file:string,percent:number)=>void)=>void}>.js';
-
-const uploader = await createFileUploader({
-  endpoint: '/api/upload',
-  maxFileSize: 50 * 1024 * 1024, // 50MB
-  allowedTypes: ['image/*', 'video/*', '.pdf'],
-  multiple: true,
-  chunkSize: 1024 * 1024 // 1MB chunks
-});
-
-const dropZone = document.getElementById('dropZone');
-uploader.attachTo(dropZone);
-
-uploader.onProgress((filename, percent) => {
-  document.getElementById(`progress-${filename}`).value = percent;
-});</code></pre>
-
-    <h3>Rich Text Editor</h3>
-    <pre><code>// WYSIWYG editor with markdown support
-import { createRichEditor } from 'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string,plugins%3F:string[],autoSave%3F:boolean}):Promise<{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void,onContentChange:(callback:(content:string,wordCount:number)=>void)=>void,exportAs:(format:'html'|'markdown'|'pdf')=>Promise<string|Blob>}>.js';
-
-const editor = await createRichEditor({
-  container: '#editor',
-  features: ['bold', 'italic', 'lists', 'links', 'images', 'tables', 'code'],
-  theme: 'modern',
-  plugins: ['markdown', 'syntax-highlight'],
-  autoSave: true
-});
-
-editor.onContentChange((content, wordCount) => {
-  document.getElementById('wordCount').textContent = `${wordCount} words`;
-});
-
-editor.setContent('# Welcome\n\nStart typing...');</code></pre>
-
-    <h3>Interactive Data Dashboard</h3>
-    <pre><code>// Dashboard with multiple chart types
-import { createDashboard } from 'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string,responsive%3F:boolean}):Promise<{addChart:(id:string,type:string,data:any[],options%3F:any)=>void,updateChart:(id:string,data:any[])=>void,addFilter:(name:string,type:string,values:any[])=>void,onFilterChange:(callback:(filters:any)=>void)=>void,exportDashboard:(format:'png'|'pdf')=>Promise<Blob>}>.js';
-
-const dashboard = await createDashboard({
-  container: '#dashboard',
-  layout: 'grid',
-  responsive: true
-});
-
-dashboard.addChart('sales', 'line', [
-  { x: 'Jan', y: 1000 },
-  { x: 'Feb', y: 1200 },
-  { x: 'Mar', y: 1100 }
-], { title: 'Monthly Sales' });
-
-dashboard.addFilter('dateRange', 'date', ['2024-01-01', '2024-12-31']);</code></pre>
 
     <h2>🎯 Prompt Syntax</h2>
     <ul>
@@ -379,6 +341,7 @@ dashboard.addFilter('dateRange', 'date', ['2024-01-01', '2024-12-31']);</code></
 
     <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e7eb; color: #6b7280;">
         <p>Made with ❤️ for the JavaScript ecosystem. <a href="https://github.com/Strawberry-Computer/unpkg.ai" style="color: #2563eb;">View on GitHub</a></p>
+        <p>A product by <a href="https://strawberry.computer" style="color: #2563eb;">strawberry.computer</a></p>
     </footer>
 
     <script>
@@ -456,6 +419,33 @@ console.log(${functionName}(/* add your parameters here */));`;
         
         // Demo System Functions - Simplified for iframe execution
         const demoTemplates = {
+            currency: {
+                title: '💱 Currency Formatter Demo',
+                code: `import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
+
+const amounts = [1234.56, 9999.99, 0.50, 1000000.75];
+const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CAD'];
+
+// Display the results
+document.body.innerHTML = \\\`
+<div style="font-family: system-ui; padding: 2rem; max-width: 500px; margin: 0 auto;">
+    <h2 style="color: #059669; margin: 0 0 1.5rem 0;">💱 Currency Formatter Results</h2>
+    \\\${amounts.map(amount => \\\`
+        <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid #059669; margin-bottom: 1rem;">
+            <h3 style="margin: 0 0 0.75rem 0; color: #065f46;">Amount: \\\${amount}</h3>
+            <div style="display: grid; gap: 0.5rem;">
+                \\\${currencies.map(currency => \\\`
+                    <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 0.5rem; border-radius: 4px;">
+                        <span style="font-weight: 500; color: #374151;">\\\${currency}:</span>
+                        <code style="background: #1f2937; color: #f9fafb; padding: 0.25rem 0.5rem; border-radius: 3px; font-family: monospace;">\\\${formatCurrency(amount, currency)}</code>
+                    </div>
+                \\\`).join('')}
+            </div>
+        </div>
+    \\\`).join('')}
+</div>
+\\\`;`
+            },
             tip: {
                 title: '💰 Tip Calculator Demo',
                 code: `import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
@@ -569,6 +559,110 @@ game.start();
 
 // Add some styling to the body
 document.body.style.cssText = 'font-family: system-ui; margin: 0; padding: 1rem; background: #f9fafb;';`
+            },
+            editor: {
+                title: '📝 Rich Text Editor Demo',
+                code: `import { createRichEditor } from 'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}.js';
+
+// Create container for the editor
+document.body.innerHTML = \\\`
+<div style="font-family: system-ui; max-width: 800px; margin: 2rem auto; padding: 1rem;">
+    <h2 style="color: #7c3aed; margin: 0 0 1rem 0;">📝 Rich Text Editor Demo</h2>
+    <div id="editor-container" style="border: 1px solid #e5e7eb; border-radius: 8px; min-height: 300px; background: white;"></div>
+    <div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center;">
+        <button id="get-content" style="padding: 0.5rem 1rem; background: #7c3aed; color: white; border: none; border-radius: 4px; cursor: pointer;">Get Content</button>
+        <button id="clear-editor" style="padding: 0.5rem 1rem; background: #6b7280; color: white; border: none; border-radius: 4px; cursor: pointer;">Clear</button>
+        <span id="word-count" style="color: #6b7280; font-size: 0.9em;"></span>
+    </div>
+    <div id="content-output" style="margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 4px; border-left: 4px solid #7c3aed; font-family: monospace; white-space: pre-wrap; max-height: 200px; overflow-y: auto;"></div>
+</div>
+\\\`;
+
+// Initialize the editor
+const editor = createRichEditor({
+    container: '#editor-container',
+    features: ['bold', 'italic', 'lists', 'links'],
+    theme: 'modern'
+});
+
+// Set initial content
+editor.setContent('# Welcome to the Rich Text Editor\\n\\nThis is a **bold** statement and this is *italic* text.\\n\\n- List item 1\\n- List item 2\\n\\nTry editing this content!');
+
+// Add event handlers
+document.getElementById('get-content').onclick = () => {
+    const content = editor.getContent();
+    document.getElementById('content-output').textContent = content;
+};
+
+document.getElementById('clear-editor').onclick = () => {
+    editor.setContent('');
+    document.getElementById('content-output').textContent = '';
+};`
+            },
+            dashboard: {
+                title: '📊 Interactive Data Dashboard Demo',
+                code: `import { createDashboard } from 'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}.js';
+
+// Create container for the dashboard
+document.body.innerHTML = \\\`
+<div style="font-family: system-ui; max-width: 1000px; margin: 2rem auto; padding: 1rem;">
+    <h2 style="color: #f59e0b; margin: 0 0 1rem 0;">📊 Interactive Dashboard Demo</h2>
+    <div style="display: grid; gap: 1rem; margin-bottom: 1rem;">
+        <div style="display: flex; gap: 1rem;">
+            <button id="update-sales" style="padding: 0.5rem 1rem; background: #f59e0b; color: white; border: none; border-radius: 4px; cursor: pointer;">Update Sales Data</button>
+            <button id="add-users-chart" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Users Chart</button>
+            <button id="add-revenue-chart" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Revenue Chart</button>
+        </div>
+    </div>
+    <div id="dashboard-container" style="border: 1px solid #e5e7eb; border-radius: 8px; min-height: 400px; background: white; padding: 1rem;"></div>
+</div>
+\\\`;
+
+// Initialize the dashboard
+const dashboard = createDashboard({
+    container: '#dashboard-container',
+    layout: 'grid'
+});
+
+// Add initial sales chart
+dashboard.addChart('sales', 'line', [
+    { x: 'Jan', y: 1000 },
+    { x: 'Feb', y: 1200 },
+    { x: 'Mar', y: 1100 },
+    { x: 'Apr', y: 1400 },
+    { x: 'May', y: 1600 }
+]);
+
+// Add event handlers
+document.getElementById('update-sales').onclick = () => {
+    const newData = [
+        { x: 'Jan', y: Math.floor(Math.random() * 2000) + 500 },
+        { x: 'Feb', y: Math.floor(Math.random() * 2000) + 500 },
+        { x: 'Mar', y: Math.floor(Math.random() * 2000) + 500 },
+        { x: 'Apr', y: Math.floor(Math.random() * 2000) + 500 },
+        { x: 'May', y: Math.floor(Math.random() * 2000) + 500 }
+    ];
+    dashboard.updateChart('sales', newData);
+};
+
+document.getElementById('add-users-chart').onclick = () => {
+    dashboard.addChart('users', 'bar', [
+        { x: 'Jan', y: 150 },
+        { x: 'Feb', y: 230 },
+        { x: 'Mar', y: 180 },
+        { x: 'Apr', y: 290 },
+        { x: 'May', y: 340 }
+    ]);
+};
+
+document.getElementById('add-revenue-chart').onclick = () => {
+    dashboard.addChart('revenue', 'area', [
+        { x: 'Q1', y: 25000 },
+        { x: 'Q2', y: 35000 },
+        { x: 'Q3', y: 28000 },
+        { x: 'Q4', y: 42000 }
+    ]);
+};`
             }
         };
         
