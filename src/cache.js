@@ -37,19 +37,20 @@ export const cache = {
     }
   },
 
-  async set(prompt, queryParams, moduleContent) {
+  async set(prompt, queryParams, moduleContent, provider = null) {
     try {
       const hash = hashPrompt(prompt, queryParams)
       const pool = getPool()
       
       await pool.query(
-        `INSERT INTO module_cache (prompt_hash, prompt_text, query_params, module_content, created_at) 
-         VALUES ($1, $2, $3, $4, NOW()) 
+        `INSERT INTO module_cache (prompt_hash, prompt_text, query_params, module_content, provider, created_at) 
+         VALUES ($1, $2, $3, $4, $5, NOW()) 
          ON CONFLICT (prompt_hash) DO UPDATE SET 
          module_content = EXCLUDED.module_content,
          query_params = EXCLUDED.query_params,
-         prompt_text = EXCLUDED.prompt_text`,
-        [hash, prompt, JSON.stringify(queryParams), moduleContent]
+         prompt_text = EXCLUDED.prompt_text,
+         provider = EXCLUDED.provider`,
+        [hash, prompt, JSON.stringify(queryParams), moduleContent, provider]
       )
       
       return true

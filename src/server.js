@@ -85,13 +85,13 @@ app.get('/esm/:prompt', async (c) => {
     
     debug('Cache miss - generating new module')
     // Generate new module
-    const moduleContent = await generator.generate(prompt, queryParams)
+    const result = await generator.generate(prompt, queryParams)
     
-    // Cache the result
-    await cache.set(prompt, queryParams, moduleContent)
-    debug('Module generated and cached')
+    // Cache the result with provider info
+    await cache.set(prompt, queryParams, result.content, result.provider)
+    debug('Module generated and cached using provider:', result.provider)
     
-    return c.text(moduleContent, 200, {
+    return c.text(result.content, 200, {
       'Content-Type': 'application/javascript',
       'Cache-Control': 'public, max-age=31536000'
     })

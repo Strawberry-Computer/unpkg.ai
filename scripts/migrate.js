@@ -29,6 +29,12 @@ async function migrate() {
       ADD COLUMN IF NOT EXISTS prompt_text TEXT;
     `)
 
+    // Add provider column to track which service generated the content
+    await client.query(`
+      ALTER TABLE module_cache 
+      ADD COLUMN IF NOT EXISTS provider VARCHAR(50);
+    `)
+
     // Create index
     await client.query(`
       CREATE INDEX IF NOT EXISTS idx_prompt_hash ON module_cache(prompt_hash);

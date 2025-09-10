@@ -54,11 +54,15 @@ export const generator = {
       debug('Full prompt length:', fullPrompt.length)
       
       const response = await pollinations.generate(fullPrompt, queryParams)
-      debug('Got response from API, length:', response.length)
+      debug('Got response from API, length:', response.content.length)
+      debug('Provider used:', response.provider)
       
       debug('Module generation successful')
       
-      return response.trim()
+      return {
+        content: response.content.trim(),
+        provider: response.provider
+      }
       
     } catch (error) {
       debug('Generator error:', error.message)

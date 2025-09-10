@@ -1,10 +1,18 @@
 import { createDebugger } from './debug.js'
+import { openrouter } from './openrouter.js'
 
 const debug = createDebugger('pollinations')
 
 export const pollinations = {
   async generate(prompt, options = {}) {
     const { model = 'openai', seed = null } = options
+    
+    // Check if we should force OpenRouter usage
+    if (process.env.FORCE_OPENROUTER === 'yes') {
+      debug('FORCE_OPENROUTER=yes, using OpenRouter directly')
+      return await openrouter.generate(prompt, options)
+    }
+    
     debug('API request with model:', model, 'seed:', seed)
     
     try {
@@ -36,11 +44,21 @@ export const pollinations = {
       debug('Response starts with export?', result.trim().startsWith('export'))
       debug('Raw API response:', result)
       
-      return result
+      return {
+        content: result,
+        provider: 'pollinations'
+      }
       
     } catch (error) {
       console.error('Pollinations API error:', error)
-      throw new Error('Failed to generate content from Pollinations API')
+      debug('Falling back to OpenRouter due to error:', error.message)
+      
+      try {
+        return await openrouter.generate(prompt, options)
+      } catch (fallbackError) {
+        console.error('OpenRouter fallback also failed:', fallbackError)
+        throw new Error('Both Pollinations and OpenRouter APIs failed')
+      }
     }
   }
 }
