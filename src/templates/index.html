@@ -473,12 +473,8 @@ dashboard.addChart('sales', 'line', [
                         consoleOutput.textContent += 'Script loading error: ' + error.message + '\n';
                     };
                     
-                    iframeDoc.body.appendChild(script);
-                    
-                    consoleOutput.textContent = 'Code running in iframe... Check the result panel above.\n';
-                    
-                    // Auto-switch logic: stay on Console unless iframe has more than just script
-                    setTimeout(() => {
+                    script.onload = () => {
+                        // Module has loaded, check for visual content
                         const iframeBody = iframe.contentDocument.body;
                         const hasVisualContent = iframeBody && iframeBody.children.length > 1; // More than just the script
                         
@@ -486,7 +482,11 @@ dashboard.addChart('sales', 'line', [
                         if (hasVisualContent) {
                             switchTab('result');
                         }
-                    }, 1500); // Wait 1.5s for module loading and any DOM updates
+                    };
+                    
+                    iframeDoc.body.appendChild(script);
+                    
+                    consoleOutput.textContent = 'Code running in iframe... Check the result panel above.\n';
                 };
                 
             } catch (error) {
