@@ -223,8 +223,13 @@ console.log(palette); // { colors: [{hex: '#3B82F6', name: 'Blue'}, ...], scheme
         <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { initMinesweeper } from 
   'https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
 
+// Create container for the game
+const gameContainer = document.createElement('div');
+gameContainer.id = 'game-container';
+document.body.appendChild(gameContainer);
+
 // Creates a complete playable minesweeper game with UI
-const game = initMinesweeper('#game-container', { width: 16, height: 16, mines: 40 });
+const game = initMinesweeper('#game-container', { width: 10, height: 10, mines: 15 });
 console.log('Game initialized:', game);
 game.start(); // Full game with click handlers, animations, timer, score tracking</code></pre>
 
@@ -241,6 +246,12 @@ game.start(); // Full game with click handlers, animations, timer, score trackin
         
         <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createRichEditor } from 
   'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}.js';
+
+// Create container for the editor
+const editorContainer = document.createElement('div');
+editorContainer.id = 'editor';
+editorContainer.style.cssText = 'border: 1px solid #e5e7eb; border-radius: 8px; min-height: 200px; background: white;';
+document.body.appendChild(editorContainer);
 
 const editor = createRichEditor({
   container: '#editor',
@@ -262,6 +273,12 @@ editor.setContent('# Welcome\n\nStart typing...');</code></pre>
         
         <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createDashboard } from 
   'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}.js';
+
+// Create container for the dashboard
+const dashboardContainer = document.createElement('div');
+dashboardContainer.id = 'dashboard';
+dashboardContainer.style.cssText = 'border: 1px solid #e5e7eb; border-radius: 8px; min-height: 300px; background: white; padding: 1rem;';
+document.body.appendChild(dashboardContainer);
 
 const dashboard = createDashboard({
   container: '#dashboard',
@@ -368,11 +385,16 @@ console.log('Chart added to dashboard');</code></pre>
             document.getElementById('demoSection').style.display = 'block';
             document.getElementById('demoTitle').textContent = title;
             document.getElementById('codeEditor').value = code;
-            document.getElementById('consoleOutput').textContent = 'Ready to run code in iframe...';
             
-            // Clear the iframe
+            // Clear console output
+            document.getElementById('consoleOutput').textContent = 'Ready to run code...';
+            
+            // Clear and reset iframe
             const iframe = document.getElementById('resultFrame');
             iframe.src = 'about:blank';
+            
+            // Default to Console tab
+            switchTab('console');
             
             // Scroll to demo section
             document.getElementById('demoSection').scrollIntoView({ behavior: 'smooth' });
@@ -415,26 +437,7 @@ console.log('Chart added to dashboard');</code></pre>
                     const iframeDoc = iframe.contentDocument;
                     const iframeWin = iframe.contentWindow;
                     
-                    // Write HTML content directly to iframe with proper module support
-                    iframeDoc.open();
-                    iframeDoc.write(`
-                        <!DOCTYPE html>
-                        <html>
-                        <head>
-                            <base href="${window.location.origin}/" />
-                            <meta charset="UTF-8">
-                            <style>
-                                body { margin: 0; padding: 10px; font-family: system-ui, sans-serif; }
-                                * { box-sizing: border-box; }
-                                #output { margin-top: 10px; }
-                            </style>
-                        </head>
-                        <body>
-                            <div id="output">Ready to run code...</div>
-                        </body>
-                        </html>
-                    `);
-                    iframeDoc.close();
+                    // Just create the script element directly
                     
                     // Capture console logs
                     const originalLog = iframeWin.console.log;
@@ -469,18 +472,14 @@ console.log('Chart added to dashboard');</code></pre>
                     
                     consoleOutput.textContent = 'Code running in iframe... Check the result panel above.\n';
                     
-                    // Auto-switch to Console tab after a brief delay to check for visual content
+                    // Auto-switch logic: stay on Console unless iframe has more than just script
                     setTimeout(() => {
                         const iframeBody = iframe.contentDocument.body;
-                        const output = iframeBody.querySelector('#output');
-                        const hasVisualContent = output && output.innerHTML && 
-                            !output.innerHTML.includes('Ready to run code...') &&
-                            !output.innerHTML.includes('Loading module...') &&
-                            output.innerHTML.trim() !== '';
+                        const hasVisualContent = iframeBody && iframeBody.children.length > 1; // More than just the script
                         
-                        // If no visual content, switch to console
-                        if (!hasVisualContent) {
-                            switchTab('console');
+                        // Switch to Live Result only if there's actual visual content
+                        if (hasVisualContent) {
+                            switchTab('result');
                         }
                     }, 1500); // Wait 1.5s for module loading and any DOM updates
                 };
