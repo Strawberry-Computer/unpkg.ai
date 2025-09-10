@@ -156,11 +156,11 @@ console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"</code></pre>
   'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
 
 const formatted = formatCurrency(1234.56, 'EUR');
-// "€1,234.56"</code></pre>
+console.log(formatted); // "€1,234.56"</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-            <button onclick="openDemo('currency')" class="try-now-btn">Try Now</button>
-            <button onclick="copyCode('currency')" class="secondary-btn">Copy Code</button>
+            <button onclick="openDemo(this)" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode(this)" class="secondary-btn">Copy Code</button>
             <button onclick="openModule('formatCurrency(amount:number,currency%3F:string):string')" class="view-module-btn">View Module</button>
         </div>
     </div>
@@ -173,11 +173,11 @@ const formatted = formatCurrency(1234.56, 'EUR');
   'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
 
 const result = calculateTip(85.50, 18, 4);
-// { tip: 15.39, total: 100.89, perPerson: 25.22 }</code></pre>
+console.log(result); // { tip: 15.39, total: 100.89, perPerson: 25.22 }</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-            <button onclick="openDemo('tip')" class="try-now-btn">Try Now</button>
-            <button onclick="copyCode('tip')" class="secondary-btn">Copy Code</button>
+            <button onclick="openDemo(this)" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode(this)" class="secondary-btn">Copy Code</button>
             <button onclick="openModule('calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}')" class="view-module-btn">View Module</button>
         </div>
     </div>
@@ -190,11 +190,11 @@ const result = calculateTip(85.50, 18, 4);
   'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
 
 const result = generatePassword({ length: 16, symbols: true });
-// { password: 'K#9m$L2pQ!7vX8nR', strength: 95, feedback: ['Very strong'] }</code></pre>
+console.log(result); // { password: 'K#9m$L2pQ!7vX8nR', strength: 95, feedback: ['Very strong'] }</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-            <button onclick="openDemo('password')" class="try-now-btn">Try Now</button>
-            <button onclick="copyCode('password')" class="secondary-btn">Copy Code</button>
+            <button onclick="openDemo(this)" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode(this)" class="secondary-btn">Copy Code</button>
             <button onclick="openModule('generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}')" class="view-module-btn">View Module</button>
         </div>
     </div>
@@ -207,11 +207,11 @@ const result = generatePassword({ length: 16, symbols: true });
   'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
 
 const palette = generatePalette('#3B82F6', 5, 'complementary');
-// { colors: [{hex: '#3B82F6', name: 'Blue'}, ...], scheme: 'Complementary' }</code></pre>
+console.log(palette); // { colors: [{hex: '#3B82F6', name: 'Blue'}, ...], scheme: 'Complementary' }</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-            <button onclick="openDemo('palette')" class="try-now-btn">Try Now</button>
-            <button onclick="copyCode('palette')" class="secondary-btn">Copy Code</button>
+            <button onclick="openDemo(this)" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode(this)" class="secondary-btn">Copy Code</button>
             <button onclick="openModule('generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}')" class="view-module-btn">View Module</button>
         </div>
     </div>
@@ -225,11 +225,12 @@ const palette = generatePalette('#3B82F6', 5, 'complementary');
 
 // Creates a complete playable minesweeper game with UI
 const game = initMinesweeper('#game-container', { width: 16, height: 16, mines: 40 });
+console.log('Game initialized:', game);
 game.start(); // Full game with click handlers, animations, timer, score tracking</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-            <button onclick="openDemo('minesweeper')" class="try-now-btn">Try Now</button>
-            <button onclick="copyCode('minesweeper')" class="secondary-btn">Copy Code</button>
+            <button onclick="openDemo(this)" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode(this)" class="secondary-btn">Copy Code</button>
             <button onclick="openModule('initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}')" class="view-module-btn">View Module</button>
         </div>
     </div>
@@ -245,11 +246,12 @@ const editor = createRichEditor({
   container: '#editor',
   features: ['bold', 'italic', 'lists', 'links']
 });
+console.log('Editor created:', editor);
 editor.setContent('# Welcome\n\nStart typing...');</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-            <button onclick="openDemo('editor')" class="try-now-btn">Try Now</button>
-            <button onclick="copyCode('editor')" class="secondary-btn">Copy Code</button>
+            <button onclick="openDemo(this)" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode(this)" class="secondary-btn">Copy Code</button>
             <button onclick="openModule('createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}')" class="view-module-btn">View Module</button>
         </div>
     </div>
@@ -265,13 +267,15 @@ const dashboard = createDashboard({
   container: '#dashboard',
   layout: 'grid'
 });
+console.log('Dashboard created:', dashboard);
 dashboard.addChart('sales', 'line', [
   { x: 'Jan', y: 1000 }, { x: 'Feb', y: 1200 }
-]);</code></pre>
+]);
+console.log('Chart added to dashboard');</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
-            <button onclick="openDemo('dashboard')" class="try-now-btn">Try Now</button>
-            <button onclick="copyCode('dashboard')" class="secondary-btn">Copy Code</button>
+            <button onclick="openDemo(this)" class="try-now-btn">Try Now</button>
+            <button onclick="copyCode(this)" class="secondary-btn">Copy Code</button>
             <button onclick="openModule('createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}')" class="view-module-btn">View Module</button>
         </div>
     </div>
@@ -284,28 +288,30 @@ dashboard.addChart('sales', 'line', [
         </div>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem;">
-            <!-- Code Editor -->
+            <!-- Code Editor with Run button as header -->
             <div>
-                <h4 style="margin: 0 0 0.5rem 0; color: #374151;">📝 Code Editor</h4>
-                <textarea id="codeEditor" style="width: 100%; height: 200px; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.25rem; resize: vertical;"></textarea>
-                <button onclick="runCodeInIframe()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">▶ Run in Iframe</button>
+                <div style="margin-bottom: 0.5rem;">
+                    <button onclick="runCodeInIframe()" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500;">▶ Run</button>
+                </div>
+                <textarea id="codeEditor" style="width: 100%; height: 300px; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.25rem; resize: vertical;"></textarea>
             </div>
             
-            <!-- Live Preview -->
+            <!-- Tabbed Output -->
             <div>
-                <h4 style="margin: 0 0 0.5rem 0; color: #374151;">🖼️ Live Result</h4>
-                <iframe id="resultFrame" style="width: 100%; height: 200px; border: 1px solid #d1d5db; border-radius: 0.25rem; background: white;">
-                </iframe>
-                <div style="margin-top: 0.5rem; font-size: 0.8em; color: #6b7280; text-align: center;">
-                    Code runs in isolated iframe - perfect for UI modules and interactive demos
+                <div style="margin-bottom: 0.5rem;">
+                    <button id="resultTab" onclick="switchTab('result')" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 0.25rem 0.25rem 0 0; cursor: pointer; margin-right: 1px;">🖼️ Live Result</button>
+                    <button id="consoleTab" onclick="switchTab('console')" style="padding: 0.5rem 1rem; background: #6b7280; color: white; border: none; border-radius: 0.25rem 0.25rem 0 0; cursor: pointer;">📟 Console</button>
+                </div>
+                
+                <div id="resultPanel" style="display: block;">
+                    <iframe id="resultFrame" style="width: 100%; height: 300px; border: 1px solid #d1d5db; border-radius: 0 0.25rem 0.25rem 0.25rem; background: white;">
+                    </iframe>
+                </div>
+                
+                <div id="consolePanel" style="display: none;">
+                    <div id="consoleOutput" style="background: #1f2937; color: #f9fafb; font-family: monospace; font-size: 0.85em; padding: 0.75rem; border-radius: 0 0.25rem 0.25rem 0.25rem; min-height: 300px; white-space: pre-wrap; overflow-y: auto;">Ready to run code...</div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Console Output -->
-        <div>
-            <h4 style="margin: 0 0 0.5rem 0; color: #374151;">📟 Console Output</h4>
-            <div id="consoleOutput" style="background: #1f2937; color: #f9fafb; font-family: monospace; font-size: 0.85em; padding: 0.75rem; border-radius: 0.25rem; min-height: 60px; white-space: pre-wrap;">Ready to run code...</div>
         </div>
     </div>
 
@@ -318,9 +324,6 @@ dashboard.addChart('sales', 'line', [
     <ul>
         <li><span class="highlight">Functions:</span> <code>functionName(param1:type1,param2%3F:type2):ReturnType</code></li>
         <li><span class="highlight">Objects:</span> <code>{property1:type1,property2%3F:type2}</code></li>
-        <li><span class="highlight">Generics:</span> <code>functionName&lt;T&gt;(param:T[]):T[]</code></li>
-        <li><span class="highlight">Spaces:</span> Use <code>+</code> for multi-word names: <code>validate+email+address</code></li>
-        <li><span class="highlight">Optional:</span> Use <code>%3F</code> for optional params: <code>param%3F:string</code></li>
     </ul>
 
     <h2>🔗 API Endpoints</h2>
@@ -333,8 +336,6 @@ dashboard.addChart('sales', 'line', [
     <h2>✨ Features</h2>
     <ul>
         <li>🔄 <strong>Permanent caching</strong> - Generated modules cached forever</li>
-        <li>📝 <strong>TypeScript integration</strong> - Full JSDoc type annotations</li>
-        <li>🎯 <strong>Precise signatures</strong> - Include TypeScript-style types for exact output</li>
         <li>⚡ <strong>Instant delivery</strong> - Cached modules served instantly</li>
         <li>🌐 <strong>CDN-ready</strong> - Long cache headers for optimal performance</li>
     </ul>
@@ -345,334 +346,28 @@ dashboard.addChart('sales', 'line', [
     </footer>
 
     <script>
-        function setExample(signature) {
-            document.getElementById('functionInput').value = signature;
-        }
-
-        async function generateModule() {
-            const input = document.getElementById('functionInput').value.trim();
-            const codeDisplay = document.getElementById('generatedCode');
-            const demoCode = document.getElementById('demoCode');
-            
-            if (!input) return;
-            
-            codeDisplay.textContent = '// Generating module...';
-            
-            try {
-                const encodedPrompt = encodeURIComponent(input);
-                const response = await fetch(`/esm/${encodedPrompt}.js`);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                const moduleCode = await response.text();
-                codeDisplay.textContent = moduleCode;
-                
-                // Update demo code
-                const functionName = extractFunctionName(input);
-                const importUrl = `https://unpkg.ai/esm/${encodedPrompt}.js`;
-                
-                const demoTemplate = `import { ${functionName} } from '${importUrl}';
-
-// Try calling the function:
-console.log(${functionName}(/* add your parameters here */));`;
-                
-                demoCode.value = demoTemplate;
-                
-            } catch (error) {
-                codeDisplay.textContent = `// Error: ${error.message}`;
-            }
-        }
         
-        function extractFunctionName(signature) {
-            const match = signature.match(/^([a-zA-Z_$][a-zA-Z0-9_$]*)/);
-            return match ? match[1] : 'generatedFunction';
-        }
+        // Demo System Functions - Extract code from HTML examples
         
-        function runDemo() {
-            const demoCode = document.getElementById('demoCode').value;
-            const output = document.getElementById('demoOutput');
+        function openDemo(buttonElement) {
+            // Find the parent example container
+            const exampleContainer = buttonElement.closest('div[style*="border: 1px solid"]');
+            if (!exampleContainer) return;
             
-            // Simple demo - just show what would happen
-            output.innerHTML = `<span style="color: #60a5fa;">// This would run in a real environment:</span><br><span style="color: #34d399;">✓ Module imported successfully</span><br><span style="color: #f59e0b;">ⓘ Check browser console for actual output</span>`;
+            // Extract the title from the h3 element
+            const titleElement = exampleContainer.querySelector('h3');
+            const title = titleElement ? titleElement.textContent + ' Demo' : 'Interactive Demo';
             
-            // If it's a real environment, we could eval the code
-            // For security, we'll just show a simulation
-            try {
-                if (demoCode.includes('formatCurrency')) {
-                    output.innerHTML += `<br><span style="color: #10b981;">"€1,234.56"</span>`;
-                } else if (demoCode.includes('chunk')) {
-                    output.innerHTML += `<br><span style="color: #10b981;">[[1,2], [3,4], [5,6]]</span>`;
-                } else if (demoCode.includes('validateEmail')) {
-                    output.innerHTML += `<br><span style="color: #10b981;">true</span>`;
-                }
-            } catch (e) {
-                output.innerHTML = `<span style="color: #ef4444;">Error: ${e.message}</span>`;
-            }
-        }
-        
-        // Auto-generate on page load
-        window.addEventListener('load', () => {
-            setTimeout(generateModule, 500);
-        });
-        
-        // Demo System Functions - Simplified for iframe execution
-        const demoTemplates = {
-            currency: {
-                title: '💱 Currency Formatter Demo',
-                code: `import { formatCurrency } from 'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
-
-const amounts = [1234.56, 9999.99, 0.50, 1000000.75];
-const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CAD'];
-
-// Display the results
-document.body.innerHTML = \\\`
-<div style="font-family: system-ui; padding: 2rem; max-width: 500px; margin: 0 auto;">
-    <h2 style="color: #059669; margin: 0 0 1.5rem 0;">💱 Currency Formatter Results</h2>
-    \\\${amounts.map(amount => \\\`
-        <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid #059669; margin-bottom: 1rem;">
-            <h3 style="margin: 0 0 0.75rem 0; color: #065f46;">Amount: \\\${amount}</h3>
-            <div style="display: grid; gap: 0.5rem;">
-                \\\${currencies.map(currency => \\\`
-                    <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 0.5rem; border-radius: 4px;">
-                        <span style="font-weight: 500; color: #374151;">\\\${currency}:</span>
-                        <code style="background: #1f2937; color: #f9fafb; padding: 0.25rem 0.5rem; border-radius: 3px; font-family: monospace;">\\\${formatCurrency(amount, currency)}</code>
-                    </div>
-                \\\`).join('')}
-            </div>
-        </div>
-    \\\`).join('')}
-</div>
-\\\`;`
-            },
-            tip: {
-                title: '💰 Tip Calculator Demo',
-                code: `import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
-
-const amount = 85.50;
-const percentage = 18;
-const people = 4;
-
-const result = calculateTip(amount, percentage, people);
-
-// Display the result
-document.body.innerHTML = \`
-<div style="font-family: system-ui; padding: 2rem; max-width: 400px; margin: 0 auto;">
-    <h2 style="color: #10b981; margin: 0 0 1rem 0;">💰 Tip Calculator Result</h2>
-    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid #10b981;">
-        <p><strong>Bill Amount:</strong> $\${amount.toFixed(2)}</p>
-        <p><strong>Tip (\${percentage}%):</strong> $\${result.tip.toFixed(2)}</p>
-        <p><strong>Total:</strong> $\${result.total.toFixed(2)}</p>
-        <p><strong>Per Person:</strong> $\${result.perPerson.toFixed(2)}</p>
-    </div>
-</div>
-\`;`
-            },
-            password: {
-                title: '🔐 Password Generator Demo',
-                code: `import { generatePassword } from 'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
-
-const options = {
-    length: 16,
-    symbols: true,
-    numbers: true,
-    uppercase: true,
-    lowercase: true
-};
-
-const result = generatePassword(options);
-
-// Display the result
-const strengthColor = result.strength >= 80 ? '#10b981' : result.strength >= 60 ? '#f59e0b' : '#ef4444';
-
-document.body.innerHTML = \`
-<div style="font-family: system-ui; padding: 2rem; max-width: 400px; margin: 0 auto;">
-    <h2 style="color: #7c3aed; margin: 0 0 1rem 0;">🔐 Generated Password</h2>
-    <div style="background: #faf5ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #7c3aed; margin-bottom: 1rem;">
-        <div style="font-family: monospace; background: #1f2937; color: #f9fafb; padding: 0.75rem; border-radius: 4px; word-break: break-all; font-size: 1.1em;">
-            \${result.password}
-        </div>
-    </div>
-    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
-        <p><strong>Strength:</strong> <span style="color: \${strengthColor}; font-weight: 600;">\${result.strength}/100</span></p>
-        <p><strong>Feedback:</strong></p>
-        <ul style="margin: 0.5rem 0 0 1rem; color: #6b7280;">
-            \${result.feedback.map(f => \`<li>\${f}</li>\`).join('')}
-        </ul>
-    </div>
-</div>
-\`;`
-            },
-            palette: {
-                title: '🎨 Color Palette Demo',
-                code: `import { generatePalette } from 'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
-
-const baseColor = '#3B82F6';
-const count = 5;
-const type = 'complementary';
-
-const palette = generatePalette(baseColor, count, type);
-
-// Display the result
-document.body.innerHTML = \`
-<div style="font-family: system-ui; padding: 2rem; max-width: 400px; margin: 0 auto;">
-    <h2 style="color: #f59e0b; margin: 0 0 1rem 0;">🎨 \${palette.scheme} Palette</h2>
-    <div style="display: grid; gap: 0.75rem;">
-        \${palette.colors.map(color => \`
-            <div style="display: flex; align-items: center; gap: 0.75rem; background: #fffbeb; padding: 0.75rem; border-radius: 8px;">
-                <div style="width: 50px; height: 50px; background: \${color.hex}; border-radius: 8px; border: 1px solid #d1d5db; cursor: pointer;" 
-                     onclick="navigator.clipboard.writeText('\${color.hex}')" 
-                     title="Click to copy \${color.hex}"></div>
-                <div style="flex: 1;">
-                    <div style="font-weight: 500; color: #374151;">\${color.name}</div>
-                    <div style="font-family: monospace; color: #6b7280; font-size: 0.9em;">\${color.hex}</div>
-                </div>
-            </div>
-        \`).join('')}
-    </div>
-    <p style="text-align: center; color: #6b7280; font-size: 0.9em; margin-top: 1rem;">
-        Click any color swatch to copy hex code
-    </p>
-</div>
-\`;`
-            },
-            minesweeper: {
-                title: '💣 Complete Minesweeper Game Demo',
-                code: `import { initMinesweeper } from 'https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
-
-// Create container for the game
-const container = document.createElement('div');
-container.id = 'minesweeper-game';
-container.style.cssText = 'margin: 1rem auto; max-width: 600px;';
-document.body.appendChild(container);
-
-// Initialize full minesweeper game with UI
-const game = initMinesweeper('#minesweeper-game', {
-    width: 16,
-    height: 16, 
-    mines: 40
-});
-
-// Start the game - creates complete playable UI
-game.start();
-
-// Add some styling to the body
-document.body.style.cssText = 'font-family: system-ui; margin: 0; padding: 1rem; background: #f9fafb;';`
-            },
-            editor: {
-                title: '📝 Rich Text Editor Demo',
-                code: `import { createRichEditor } from 'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}.js';
-
-// Create container for the editor
-document.body.innerHTML = \\\`
-<div style="font-family: system-ui; max-width: 800px; margin: 2rem auto; padding: 1rem;">
-    <h2 style="color: #7c3aed; margin: 0 0 1rem 0;">📝 Rich Text Editor Demo</h2>
-    <div id="editor-container" style="border: 1px solid #e5e7eb; border-radius: 8px; min-height: 300px; background: white;"></div>
-    <div style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center;">
-        <button id="get-content" style="padding: 0.5rem 1rem; background: #7c3aed; color: white; border: none; border-radius: 4px; cursor: pointer;">Get Content</button>
-        <button id="clear-editor" style="padding: 0.5rem 1rem; background: #6b7280; color: white; border: none; border-radius: 4px; cursor: pointer;">Clear</button>
-        <span id="word-count" style="color: #6b7280; font-size: 0.9em;"></span>
-    </div>
-    <div id="content-output" style="margin-top: 1rem; padding: 1rem; background: #f8fafc; border-radius: 4px; border-left: 4px solid #7c3aed; font-family: monospace; white-space: pre-wrap; max-height: 200px; overflow-y: auto;"></div>
-</div>
-\\\`;
-
-// Initialize the editor
-const editor = createRichEditor({
-    container: '#editor-container',
-    features: ['bold', 'italic', 'lists', 'links'],
-    theme: 'modern'
-});
-
-// Set initial content
-editor.setContent('# Welcome to the Rich Text Editor\\n\\nThis is a **bold** statement and this is *italic* text.\\n\\n- List item 1\\n- List item 2\\n\\nTry editing this content!');
-
-// Add event handlers
-document.getElementById('get-content').onclick = () => {
-    const content = editor.getContent();
-    document.getElementById('content-output').textContent = content;
-};
-
-document.getElementById('clear-editor').onclick = () => {
-    editor.setContent('');
-    document.getElementById('content-output').textContent = '';
-};`
-            },
-            dashboard: {
-                title: '📊 Interactive Data Dashboard Demo',
-                code: `import { createDashboard } from 'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}.js';
-
-// Create container for the dashboard
-document.body.innerHTML = \\\`
-<div style="font-family: system-ui; max-width: 1000px; margin: 2rem auto; padding: 1rem;">
-    <h2 style="color: #f59e0b; margin: 0 0 1rem 0;">📊 Interactive Dashboard Demo</h2>
-    <div style="display: grid; gap: 1rem; margin-bottom: 1rem;">
-        <div style="display: flex; gap: 1rem;">
-            <button id="update-sales" style="padding: 0.5rem 1rem; background: #f59e0b; color: white; border: none; border-radius: 4px; cursor: pointer;">Update Sales Data</button>
-            <button id="add-users-chart" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Users Chart</button>
-            <button id="add-revenue-chart" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Revenue Chart</button>
-        </div>
-    </div>
-    <div id="dashboard-container" style="border: 1px solid #e5e7eb; border-radius: 8px; min-height: 400px; background: white; padding: 1rem;"></div>
-</div>
-\\\`;
-
-// Initialize the dashboard
-const dashboard = createDashboard({
-    container: '#dashboard-container',
-    layout: 'grid'
-});
-
-// Add initial sales chart
-dashboard.addChart('sales', 'line', [
-    { x: 'Jan', y: 1000 },
-    { x: 'Feb', y: 1200 },
-    { x: 'Mar', y: 1100 },
-    { x: 'Apr', y: 1400 },
-    { x: 'May', y: 1600 }
-]);
-
-// Add event handlers
-document.getElementById('update-sales').onclick = () => {
-    const newData = [
-        { x: 'Jan', y: Math.floor(Math.random() * 2000) + 500 },
-        { x: 'Feb', y: Math.floor(Math.random() * 2000) + 500 },
-        { x: 'Mar', y: Math.floor(Math.random() * 2000) + 500 },
-        { x: 'Apr', y: Math.floor(Math.random() * 2000) + 500 },
-        { x: 'May', y: Math.floor(Math.random() * 2000) + 500 }
-    ];
-    dashboard.updateChart('sales', newData);
-};
-
-document.getElementById('add-users-chart').onclick = () => {
-    dashboard.addChart('users', 'bar', [
-        { x: 'Jan', y: 150 },
-        { x: 'Feb', y: 230 },
-        { x: 'Mar', y: 180 },
-        { x: 'Apr', y: 290 },
-        { x: 'May', y: 340 }
-    ]);
-};
-
-document.getElementById('add-revenue-chart').onclick = () => {
-    dashboard.addChart('revenue', 'area', [
-        { x: 'Q1', y: 25000 },
-        { x: 'Q2', y: 35000 },
-        { x: 'Q3', y: 28000 },
-        { x: 'Q4', y: 42000 }
-    ]);
-};`
-            }
-        };
-        
-        function openDemo(type) {
-            const demo = demoTemplates[type];
-            if (!demo) return;
+            // Extract the code from the pre > code element
+            const codeElement = exampleContainer.querySelector('pre code');
+            if (!codeElement) return;
             
+            const code = codeElement.textContent;
+            
+            // Open the demo section
             document.getElementById('demoSection').style.display = 'block';
-            document.getElementById('demoTitle').textContent = demo.title;
-            document.getElementById('codeEditor').value = demo.code;
+            document.getElementById('demoTitle').textContent = title;
+            document.getElementById('codeEditor').value = code;
             document.getElementById('consoleOutput').textContent = 'Ready to run code in iframe...';
             
             // Clear the iframe
@@ -687,6 +382,25 @@ document.getElementById('add-revenue-chart').onclick = () => {
             document.getElementById('demoSection').style.display = 'none';
         }
         
+        function switchTab(tab) {
+            const resultTab = document.getElementById('resultTab');
+            const consoleTab = document.getElementById('consoleTab');
+            const resultPanel = document.getElementById('resultPanel');
+            const consolePanel = document.getElementById('consolePanel');
+            
+            if (tab === 'result') {
+                resultTab.style.background = '#3b82f6';
+                consoleTab.style.background = '#6b7280';
+                resultPanel.style.display = 'block';
+                consolePanel.style.display = 'none';
+            } else {
+                resultTab.style.background = '#6b7280';
+                consoleTab.style.background = '#3b82f6';
+                resultPanel.style.display = 'none';
+                consolePanel.style.display = 'block';
+            }
+        }
+        
         function runCodeInIframe() {
             const code = document.getElementById('codeEditor').value;
             const consoleOutput = document.getElementById('consoleOutput');
@@ -695,15 +409,32 @@ document.getElementById('add-revenue-chart').onclick = () => {
             try {
                 consoleOutput.textContent = 'Running code in iframe...\n';
                 
+                // Clear iframe and write content directly
                 iframe.src = 'about:blank';
                 iframe.onload = () => {
                     const iframeDoc = iframe.contentDocument;
                     const iframeWin = iframe.contentWindow;
                     
-                    // Set up basic styling
-                    const style = iframeDoc.createElement('style');
-                    style.textContent = 'body { margin: 0; padding: 0; font-family: system-ui, sans-serif; } * { box-sizing: border-box; }';
-                    iframeDoc.head.appendChild(style);
+                    // Write HTML content directly to iframe with proper module support
+                    iframeDoc.open();
+                    iframeDoc.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <base href="${window.location.origin}/" />
+                            <meta charset="UTF-8">
+                            <style>
+                                body { margin: 0; padding: 10px; font-family: system-ui, sans-serif; }
+                                * { box-sizing: border-box; }
+                                #output { margin-top: 10px; }
+                            </style>
+                        </head>
+                        <body>
+                            <div id="output">Ready to run code...</div>
+                        </body>
+                        </html>
+                    `);
+                    iframeDoc.close();
                     
                     // Capture console logs
                     const originalLog = iframeWin.console.log;
@@ -713,21 +444,45 @@ document.getElementById('add-revenue-chart').onclick = () => {
                         const message = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' ');
                         originalLog(...args);
                         consoleOutput.textContent += message + '\n';
+                        consoleOutput.scrollTop = consoleOutput.scrollHeight;
                     };
                     
                     iframeWin.console.error = (...args) => {
                         const message = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' ');
                         originalError(...args);
                         consoleOutput.textContent += 'ERROR: ' + message + '\n';
+                        consoleOutput.scrollTop = consoleOutput.scrollHeight;
                     };
                     
-                    // Create and inject script
+                    // Create and inject module script directly with user code
                     const script = iframeDoc.createElement('script');
                     script.type = 'module';
+                    
+                    // Inject user code directly as ES6 module
                     script.textContent = code;
+                    
+                    script.onerror = (error) => {
+                        consoleOutput.textContent += 'Script loading error: ' + error.message + '\n';
+                    };
+                    
                     iframeDoc.body.appendChild(script);
                     
                     consoleOutput.textContent = 'Code running in iframe... Check the result panel above.\n';
+                    
+                    // Auto-switch to Console tab after a brief delay to check for visual content
+                    setTimeout(() => {
+                        const iframeBody = iframe.contentDocument.body;
+                        const output = iframeBody.querySelector('#output');
+                        const hasVisualContent = output && output.innerHTML && 
+                            !output.innerHTML.includes('Ready to run code...') &&
+                            !output.innerHTML.includes('Loading module...') &&
+                            output.innerHTML.trim() !== '';
+                        
+                        // If no visual content, switch to console
+                        if (!hasVisualContent) {
+                            switchTab('console');
+                        }
+                    }, 1500); // Wait 1.5s for module loading and any DOM updates
                 };
                 
             } catch (error) {
@@ -747,15 +502,22 @@ document.getElementById('add-revenue-chart').onclick = () => {
         });
         
         // Utility functions
-        function copyCode(type) {
-            const demo = demoTemplates[type];
-            if (demo) {
-                navigator.clipboard.writeText(demo.code).then(() => {
-                    // Show a brief success message
-                    const event = new CustomEvent('show-toast', { detail: { message: 'Code copied to clipboard!' } });
-                    window.dispatchEvent(event);
-                });
-            }
+        function copyCode(buttonElement) {
+            // Find the parent example container
+            const exampleContainer = buttonElement.closest('div[style*="border: 1px solid"]');
+            if (!exampleContainer) return;
+            
+            // Extract the code from the pre > code element
+            const codeElement = exampleContainer.querySelector('pre code');
+            if (!codeElement) return;
+            
+            const code = codeElement.textContent;
+            
+            navigator.clipboard.writeText(code).then(() => {
+                // Show a brief success message
+                const event = new CustomEvent('show-toast', { detail: { message: 'Code copied to clipboard!' } });
+                window.dispatchEvent(event);
+            });
         }
         
         function openModule(signature) {
