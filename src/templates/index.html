@@ -109,13 +109,31 @@
             transform: translateY(0);
         }
         
-        /* Responsive design for smaller screens */
-        @media (max-width: 768px) {
+        /* Responsive design for demo layout */
+        @media (max-width: 1200px) {
             .demo-layout {
                 grid-template-columns: 1fr !important;
                 gap: 1rem !important;
+                grid-template-rows: 1fr 1fr !important;
+                padding: 1rem !important;
             }
             
+            #demoSection {
+                height: 100vh !important; /* Fallback */
+                height: 100dvh !important; /* Use dynamic viewport height for mobile */
+                min-height: 100vh !important;
+                min-height: 100dvh !important;
+            }
+            
+            /* Ensure console is properly constrained in vertical stack */
+            #consolePanel {
+                min-height: 0 !important;
+                overflow: hidden !important;
+            }
+        }
+        
+        /* Responsive design for smaller screens */
+        @media (max-width: 768px) {
             body {
                 padding: 1rem !important;
             }
@@ -300,35 +318,35 @@ dashboard.addChart('sales', 'line', [
     </div>
 
     <!-- Expandable Demo Section (hidden by default) -->
-    <div id="demoSection" style="display: none; margin: 2rem 0; background: #f8fafc;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+    <div id="demoSection" style="display: none; flex-direction: column; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #f8fafc; z-index: 1000; overflow: hidden; box-sizing: border-box;">
+        <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid #e2e8f0; background: white; flex-shrink: 0;">
+            <button onclick="closeDemo()" style="padding: 0.5rem 1rem; background: #6b7280; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500; display: flex; align-items: center; gap: 0.5rem; margin-left: 0.5rem;">← Back</button>
             <h3 id="demoTitle" style="margin: 0; color: #374151;">Interactive Demo</h3>
-            <button onclick="closeDemo()" style="padding: 0.25rem 0.5rem; background: #ef4444; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">✕ Close</button>
         </div>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem;" class="demo-layout">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 1.5rem; flex: 1;" class="demo-layout">
             <!-- Code Editor with Run button as header -->
-            <div>
+            <div style="display: flex; flex-direction: column;">
                 <div style="margin-bottom: 0.5rem;">
                     <button onclick="runCodeInIframe()" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500;">▶ Run</button>
                 </div>
-                <textarea id="codeEditor" style="width: 100%; height: 300px; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: none; background: white; border-radius: 0.25rem; resize: vertical; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"></textarea>
+                <textarea id="codeEditor" style="width: 100%; flex: 1; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: none; background: white; border-radius: 0.25rem; resize: none; overflow: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"></textarea>
             </div>
             
             <!-- Tabbed Output -->
-            <div>
+            <div style="display: flex; flex-direction: column;">
                 <div style="margin-bottom: 0.5rem;">
                     <button id="resultTab" onclick="switchTab('result')" style="padding: 0.5rem 1rem; background: #3b82f6; color: white; border: none; border-radius: 0.25rem 0.25rem 0 0; cursor: pointer; margin-right: 1px;">🖼️ Live Result</button>
                     <button id="consoleTab" onclick="switchTab('console')" style="padding: 0.5rem 1rem; background: #6b7280; color: white; border: none; border-radius: 0.25rem 0.25rem 0 0; cursor: pointer;">📟 Console</button>
                 </div>
                 
-                <div id="resultPanel" style="display: block;">
-                    <iframe id="resultFrame" style="width: 100%; height: 300px; border: none; border-radius: 0 0.25rem 0.25rem 0.25rem; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                <div id="resultPanel" style="display: block; flex: 1;">
+                    <iframe id="resultFrame" style="width: 100%; height: 100%; border: none; border-radius: 0 0.25rem 0.25rem 0.25rem; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     </iframe>
                 </div>
                 
-                <div id="consolePanel" style="display: none;">
-                    <div id="consoleOutput" style="background: #1f2937; color: #f9fafb; font-family: monospace; font-size: 0.85em; padding: 0.75rem; border-radius: 0 0.25rem 0.25rem 0.25rem; min-height: 300px; white-space: pre-wrap; overflow-y: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Ready to run code...</div>
+                <div id="consolePanel" style="display: none; flex: 1; position: relative;">
+                    <div id="consoleOutput" style="background: #1f2937; color: #f9fafb; font-family: monospace; font-size: 0.85em; padding: 0.75rem; border-radius: 0 0.25rem 0.25rem 0.25rem; position: absolute; top: 0; left: 0; right: 0; bottom: 0; white-space: pre-wrap; overflow-y: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.1); box-sizing: border-box;">Ready to run code...</div>
                 </div>
             </div>
         </div>
@@ -383,8 +401,11 @@ dashboard.addChart('sales', 'line', [
             
             const code = codeElement.textContent;
             
+            // Hide body scrollbar when entering fullscreen
+            document.body.style.overflow = 'hidden';
+            
             // Open the demo section
-            document.getElementById('demoSection').style.display = 'block';
+            document.getElementById('demoSection').style.display = 'flex';
             document.getElementById('demoTitle').textContent = title;
             document.getElementById('codeEditor').value = code;
             
@@ -407,6 +428,8 @@ dashboard.addChart('sales', 'line', [
         
         function closeDemo() {
             document.getElementById('demoSection').style.display = 'none';
+            // Restore body scrollbar when exiting fullscreen
+            document.body.style.overflow = '';
         }
         
         function switchTab(tab) {
