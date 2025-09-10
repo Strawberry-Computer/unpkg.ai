@@ -201,18 +201,19 @@ const palette = generatePalette('#3B82F6', 5, 'complementary');
 
     <!-- Minesweeper Example -->
     <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
-        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💣 Minesweeper Game Engine</h3>
+        <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💣 Complete Minesweeper Game</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createMinesweeper } from 
-  'https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}.js';
+        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { initMinesweeper } from 
+  'https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
 
-const game = createMinesweeper(10, 10, 15);
-const result = game.reveal(5, 5); // 'continue', 'win', or 'lose'</code></pre>
+// Creates a complete playable minesweeper game with UI
+const game = initMinesweeper('#game-container', { width: 16, height: 16, mines: 40 });
+game.start(); // Full game with click handlers, animations, timer, score tracking</code></pre>
 
         <div style="display: flex; gap: 0.75rem; margin-top: 1rem;">
             <button onclick="openDemo('minesweeper')" class="try-now-btn">Try Now</button>
             <button onclick="copyCode('minesweeper')" class="secondary-btn">Copy Code</button>
-            <button onclick="openModule('createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}')" class="view-module-btn">View Module</button>
+            <button onclick="openModule('initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}')" class="view-module-btn">View Module</button>
         </div>
     </div>
 
@@ -228,14 +229,16 @@ const result = game.reveal(5, 5); // 'continue', 'win', or 'lose'</code></pre>
             <div>
                 <h4 style="margin: 0 0 0.5rem 0; color: #374151;">📝 Code Editor</h4>
                 <textarea id="codeEditor" style="width: 100%; height: 200px; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.25rem; resize: vertical;"></textarea>
-                <button onclick="runCode()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">▶ Run Code</button>
+                <button onclick="runCodeInIframe()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">▶ Run in Iframe</button>
             </div>
             
             <!-- Live Preview -->
             <div>
-                <h4 style="margin: 0 0 0.5rem 0; color: #374151;">🚀 Live Preview</h4>
-                <div id="livePreview" style="background: white; border: 1px solid #d1d5db; border-radius: 0.25rem; padding: 1rem; min-height: 200px;">
-                    Click "Try Now" on an example to see the interactive demo here.
+                <h4 style="margin: 0 0 0.5rem 0; color: #374151;">🖼️ Live Result</h4>
+                <iframe id="resultFrame" style="width: 100%; height: 200px; border: 1px solid #d1d5db; border-radius: 0.25rem; background: white;">
+                </iframe>
+                <div style="margin-top: 0.5rem; font-size: 0.8em; color: #6b7280; text-align: center;">
+                    Code runs in isolated iframe - perfect for UI modules and interactive demos
                 </div>
             </div>
         </div>
@@ -451,7 +454,7 @@ console.log(${functionName}(/* add your parameters here */));`;
             setTimeout(generateModule, 500);
         });
         
-        // Demo System Functions
+        // Demo System Functions - Simplified for iframe execution
         const demoTemplates = {
             tip: {
                 title: '💰 Tip Calculator Demo',
@@ -462,27 +465,19 @@ const percentage = 18;
 const people = 4;
 
 const result = calculateTip(amount, percentage, people);
-console.log(result);`,
-                preview: `
-                    <div style="padding: 1rem;">
-                        <h4 style="margin: 0 0 1rem 0;">🧮 Tip Calculator</h4>
-                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Bill Amount ($)</label>
-                                <input type="number" id="demoAmount" value="85.50" step="0.01" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
-                            </div>
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Tip Percentage (%)</label>
-                                <input type="number" id="demoTip" value="18" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
-                            </div>
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Number of People</label>
-                                <input type="number" id="demoPeople" value="4" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
-                            </div>
-                            <button onclick="updateTipCode()" style="padding: 0.5rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
-                        </div>
-                    </div>
-                `
+
+// Display the result
+document.body.innerHTML = \`
+<div style="font-family: system-ui; padding: 2rem; max-width: 400px; margin: 0 auto;">
+    <h2 style="color: #10b981; margin: 0 0 1rem 0;">💰 Tip Calculator Result</h2>
+    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid #10b981;">
+        <p><strong>Bill Amount:</strong> $\${amount.toFixed(2)}</p>
+        <p><strong>Tip (\${percentage}%):</strong> $\${result.tip.toFixed(2)}</p>
+        <p><strong>Total:</strong> $\${result.total.toFixed(2)}</p>
+        <p><strong>Per Person:</strong> $\${result.perPerson.toFixed(2)}</p>
+    </div>
+</div>
+\`;`
             },
             password: {
                 title: '🔐 Password Generator Demo',
@@ -497,33 +492,27 @@ const options = {
 };
 
 const result = generatePassword(options);
-console.log(result);`,
-                preview: `
-                    <div style="padding: 1rem;">
-                        <h4 style="margin: 0 0 1rem 0;">🔐 Password Options</h4>
-                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Length: <span id="lengthValue">16</span></label>
-                                <input type="range" id="demoLength" min="8" max="32" value="16" style="width: 100%;" oninput="document.getElementById('lengthValue').textContent = this.value">
-                            </div>
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
-                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
-                                    <input type="checkbox" id="demoSymbols" checked style="margin-right: 0.5rem;"> Symbols
-                                </label>
-                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
-                                    <input type="checkbox" id="demoNumbers" checked style="margin-right: 0.5rem;"> Numbers
-                                </label>
-                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
-                                    <input type="checkbox" id="demoUpper" checked style="margin-right: 0.5rem;"> Upper
-                                </label>
-                                <label style="display: flex; align-items: center; cursor: pointer; font-size: 0.9em;">
-                                    <input type="checkbox" id="demoLower" checked style="margin-right: 0.5rem;"> Lower
-                                </label>
-                            </div>
-                            <button onclick="updatePasswordCode()" style="padding: 0.5rem; background: #7c3aed; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
-                        </div>
-                    </div>
-                `
+
+// Display the result
+const strengthColor = result.strength >= 80 ? '#10b981' : result.strength >= 60 ? '#f59e0b' : '#ef4444';
+
+document.body.innerHTML = \`
+<div style="font-family: system-ui; padding: 2rem; max-width: 400px; margin: 0 auto;">
+    <h2 style="color: #7c3aed; margin: 0 0 1rem 0;">🔐 Generated Password</h2>
+    <div style="background: #faf5ff; padding: 1rem; border-radius: 8px; border-left: 4px solid #7c3aed; margin-bottom: 1rem;">
+        <div style="font-family: monospace; background: #1f2937; color: #f9fafb; padding: 0.75rem; border-radius: 4px; word-break: break-all; font-size: 1.1em;">
+            \${result.password}
+        </div>
+    </div>
+    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+        <p><strong>Strength:</strong> <span style="color: \${strengthColor}; font-weight: 600;">\${result.strength}/100</span></p>
+        <p><strong>Feedback:</strong></p>
+        <ul style="margin: 0.5rem 0 0 1rem; color: #6b7280;">
+            \${result.feedback.map(f => \`<li>\${f}</li>\`).join('')}
+        </ul>
+    </div>
+</div>
+\`;`
             },
             palette: {
                 title: '🎨 Color Palette Demo',
@@ -534,67 +523,52 @@ const count = 5;
 const type = 'complementary';
 
 const palette = generatePalette(baseColor, count, type);
-console.log(palette);`,
-                preview: `
-                    <div style="padding: 1rem;">
-                        <h4 style="margin: 0 0 1rem 0;">🎨 Palette Options</h4>
-                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Base Color</label>
-                                <input type="color" id="demoColor" value="#3B82F6" style="width: 100%; height: 40px; border: none; border-radius: 0.25rem; cursor: pointer;">
-                            </div>
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Count</label>
-                                <input type="number" id="demoCount" value="5" min="3" max="8" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
-                            </div>
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Type</label>
-                                <select id="demoType" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
-                                    <option value="complementary">Complementary</option>
-                                    <option value="analogous">Analogous</option>
-                                    <option value="triadic">Triadic</option>
-                                </select>
-                            </div>
-                            <button onclick="updatePaletteCode()" style="padding: 0.5rem; background: #f59e0b; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
-                        </div>
-                    </div>
-                `
+
+// Display the result
+document.body.innerHTML = \`
+<div style="font-family: system-ui; padding: 2rem; max-width: 400px; margin: 0 auto;">
+    <h2 style="color: #f59e0b; margin: 0 0 1rem 0;">🎨 \${palette.scheme} Palette</h2>
+    <div style="display: grid; gap: 0.75rem;">
+        \${palette.colors.map(color => \`
+            <div style="display: flex; align-items: center; gap: 0.75rem; background: #fffbeb; padding: 0.75rem; border-radius: 8px;">
+                <div style="width: 50px; height: 50px; background: \${color.hex}; border-radius: 8px; border: 1px solid #d1d5db; cursor: pointer;" 
+                     onclick="navigator.clipboard.writeText('\${color.hex}')" 
+                     title="Click to copy \${color.hex}"></div>
+                <div style="flex: 1;">
+                    <div style="font-weight: 500; color: #374151;">\${color.name}</div>
+                    <div style="font-family: monospace; color: #6b7280; font-size: 0.9em;">\${color.hex}</div>
+                </div>
+            </div>
+        \`).join('')}
+    </div>
+    <p style="text-align: center; color: #6b7280; font-size: 0.9em; margin-top: 1rem;">
+        Click any color swatch to copy hex code
+    </p>
+</div>
+\`;`
             },
             minesweeper: {
-                title: '💣 Minesweeper Demo',
-                code: `import { createMinesweeper } from 'https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}.js';
+                title: '💣 Complete Minesweeper Game Demo',
+                code: `import { initMinesweeper } from 'https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
 
-const width = 10;
-const height = 10;
-const mines = 15;
+// Create container for the game
+const container = document.createElement('div');
+container.id = 'minesweeper-game';
+container.style.cssText = 'margin: 1rem auto; max-width: 600px;';
+document.body.appendChild(container);
 
-const game = createMinesweeper(width, height, mines);
+// Initialize full minesweeper game with UI
+const game = initMinesweeper('#minesweeper-game', {
+    width: 16,
+    height: 16, 
+    mines: 40
+});
 
-// Try revealing a cell
-const result = game.reveal(5, 5);
-console.log('Reveal result:', result);
+// Start the game - creates complete playable UI
+game.start();
 
-// Check game state
-console.log('Game state:', game.getState());`,
-                preview: `
-                    <div style="padding: 1rem;">
-                        <h4 style="margin: 0 0 1rem 0;">💣 Game Options</h4>
-                        <div style="display: grid; gap: 0.75rem; max-width: 300px;">
-                            <div>
-                                <label style="display: block; margin-bottom: 0.25rem; font-size: 0.9em; color: #6b7280;">Board Size</label>
-                                <select id="demoBoardSize" style="width: 100%; padding: 0.5rem; border: 1px solid #d1d5db; border-radius: 0.25rem;">
-                                    <option value="8x8x10">8×8 (10 mines)</option>
-                                    <option value="10x10x15" selected>10×10 (15 mines)</option>
-                                    <option value="12x12x20">12×12 (20 mines)</option>
-                                </select>
-                            </div>
-                            <button onclick="updateMinesweeperCode()" style="padding: 0.5rem; background: #ef4444; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">Update Code</button>
-                            <div style="font-size: 0.8em; color: #6b7280; text-align: center;">
-                                Creates a game object with methods to reveal cells, flag mines, and check game state.
-                            </div>
-                        </div>
-                    </div>
-                `
+// Add some styling to the body
+document.body.style.cssText = 'font-family: system-ui; margin: 0; padding: 1rem; background: #f9fafb;';`
             }
         };
         
@@ -605,8 +579,11 @@ console.log('Game state:', game.getState());`,
             document.getElementById('demoSection').style.display = 'block';
             document.getElementById('demoTitle').textContent = demo.title;
             document.getElementById('codeEditor').value = demo.code;
-            document.getElementById('livePreview').innerHTML = demo.preview;
-            document.getElementById('consoleOutput').textContent = 'Ready to run code...';
+            document.getElementById('consoleOutput').textContent = 'Ready to run code in iframe...';
+            
+            // Clear the iframe
+            const iframe = document.getElementById('resultFrame');
+            iframe.src = 'about:blank';
             
             // Scroll to demo section
             document.getElementById('demoSection').scrollIntoView({ behavior: 'smooth' });
@@ -616,112 +593,64 @@ console.log('Game state:', game.getState());`,
             document.getElementById('demoSection').style.display = 'none';
         }
         
-        async function runCode() {
+        function runCodeInIframe() {
             const code = document.getElementById('codeEditor').value;
             const consoleOutput = document.getElementById('consoleOutput');
+            const iframe = document.getElementById('resultFrame');
             
             try {
-                consoleOutput.textContent = 'Running code...\n';
+                consoleOutput.textContent = 'Running code in iframe...\n';
                 
-                // Create a function that captures console.log
-                const logs = [];
-                const originalConsoleLog = console.log;
-                console.log = (...args) => {
-                    logs.push(args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' '));
-                    originalConsoleLog(...args);
+                iframe.src = 'about:blank';
+                iframe.onload = () => {
+                    const iframeDoc = iframe.contentDocument;
+                    const iframeWin = iframe.contentWindow;
+                    
+                    // Set up basic styling
+                    const style = iframeDoc.createElement('style');
+                    style.textContent = 'body { margin: 0; padding: 0; font-family: system-ui, sans-serif; } * { box-sizing: border-box; }';
+                    iframeDoc.head.appendChild(style);
+                    
+                    // Capture console logs
+                    const originalLog = iframeWin.console.log;
+                    const originalError = iframeWin.console.error;
+                    
+                    iframeWin.console.log = (...args) => {
+                        const message = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' ');
+                        originalLog(...args);
+                        consoleOutput.textContent += message + '\n';
+                    };
+                    
+                    iframeWin.console.error = (...args) => {
+                        const message = args.map(arg => typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)).join(' ');
+                        originalError(...args);
+                        consoleOutput.textContent += 'ERROR: ' + message + '\n';
+                    };
+                    
+                    // Create and inject script
+                    const script = iframeDoc.createElement('script');
+                    script.type = 'module';
+                    script.textContent = code;
+                    iframeDoc.body.appendChild(script);
+                    
+                    consoleOutput.textContent = 'Code running in iframe... Check the result panel above.\n';
                 };
                 
-                // Execute the code
-                await eval(`(async () => { ${code} })()`);
-                
-                // Restore console.log
-                console.log = originalConsoleLog;
-                
-                consoleOutput.textContent = logs.length > 0 ? logs.join('\n') : 'Code executed successfully (no output)';
             } catch (error) {
                 consoleOutput.textContent = `Error: ${error.message}`;
             }
         }
         
-        // Update functions for interactive previews
-        function updateTipCode() {
-            const amount = document.getElementById('demoAmount').value;
-            const tip = document.getElementById('demoTip').value;
-            const people = document.getElementById('demoPeople').value;
-            
-            const newCode = `import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
-
-const amount = ${amount};
-const percentage = ${tip};
-const people = ${people};
-
-const result = calculateTip(amount, percentage, people);
-console.log(result);`;
-            
-            document.getElementById('codeEditor').value = newCode;
-        }
-        
-        function updatePasswordCode() {
-            const length = document.getElementById('demoLength').value;
-            const symbols = document.getElementById('demoSymbols').checked;
-            const numbers = document.getElementById('demoNumbers').checked;
-            const uppercase = document.getElementById('demoUpper').checked;
-            const lowercase = document.getElementById('demoLower').checked;
-            
-            const newCode = `import { generatePassword } from 'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
-
-const options = {
-    length: ${length},
-    symbols: ${symbols},
-    numbers: ${numbers},
-    uppercase: ${uppercase},
-    lowercase: ${lowercase}
-};
-
-const result = generatePassword(options);
-console.log(result);`;
-            
-            document.getElementById('codeEditor').value = newCode;
-        }
-        
-        function updatePaletteCode() {
-            const color = document.getElementById('demoColor').value;
-            const count = document.getElementById('demoCount').value;
-            const type = document.getElementById('demoType').value;
-            
-            const newCode = `import { generatePalette } from 'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
-
-const baseColor = '${color}';
-const count = ${count};
-const type = '${type}';
-
-const palette = generatePalette(baseColor, count, type);
-console.log(palette);`;
-            
-            document.getElementById('codeEditor').value = newCode;
-        }
-        
-        function updateMinesweeperCode() {
-            const boardConfig = document.getElementById('demoBoardSize').value;
-            const [width, height, mines] = boardConfig.split('x').map(n => parseInt(n));
-            
-            const newCode = `import { createMinesweeper } from 'https://unpkg.ai/esm/createMinesweeper(width:number,height:number,mines:number):{board:Cell[][],reveal:(x:number,y:number)=>string,flag:(x:number,y:number)=>boolean,getState:()=>string,reset:()=>void}.js';
-
-const width = ${width};
-const height = ${height};
-const mines = ${mines};
-
-const game = createMinesweeper(width, height, mines);
-
-// Try revealing a cell
-const result = game.reveal(5, 5);
-console.log('Reveal result:', result);
-
-// Check game state
-console.log('Game state:', game.getState());`;
-            
-            document.getElementById('codeEditor').value = newCode;
-        }
+        // Listen for messages from iframe
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'console') {
+                const consoleOutput = document.getElementById('consoleOutput');
+                if (consoleOutput.textContent === 'Code running in iframe... Check the result panel above.') {
+                    consoleOutput.textContent = '';
+                }
+                consoleOutput.textContent += event.data.message + '\n';
+            }
+        });
         
         // Utility functions
         function copyCode(type) {
