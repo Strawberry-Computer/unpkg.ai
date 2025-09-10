@@ -36,6 +36,19 @@ app.get('/llms.txt', (c) => {
   })
 })
 
+// Static files
+app.get('/social-card.png', (c) => {
+  try {
+    const imageData = readFileSync(join(__dirname, '..', 'public', 'social-card.png'))
+    return c.body(imageData, 200, {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=31536000'
+    })
+  } catch (error) {
+    return c.notFound()
+  }
+})
+
 // Health check
 app.get('/health', (c) => {
   return c.json({ status: 'ok', timestamp: new Date().toISOString() })
