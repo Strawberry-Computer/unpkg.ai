@@ -19,26 +19,15 @@
             background: #f8fafc; 
             padding: 1rem; 
             border-radius: 0.5rem; 
-            border-left: 4px solid #2563eb;
             overflow-x: auto;
         }
         code { 
-            background: #e2e8f0; 
-            padding: 0.2rem 0.4rem; 
-            border-radius: 0.25rem; 
             font-size: 0.9em;
         }
         .endpoint { 
-            background: #ecfdf5; 
-            padding: 1rem; 
-            border-radius: 0.5rem; 
-            border-left: 4px solid #10b981; 
             margin: 1rem 0;
         }
         .example { 
-            background: #fef3c7; 
-            padding: 1rem; 
-            border-radius: 0.5rem; 
             margin: 1rem 0;
         }
         table { 
@@ -167,10 +156,10 @@ console.log(formatCurrency(1234.56, 'EUR')); // "€1,234.56"</code></pre>
     <h2>📚 Interactive Examples</h2>
 
     <!-- Format Currency Example -->
-    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+    <div style="margin: 1.5rem 0;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💱 Currency Formatter</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { formatCurrency } from 
+        <pre style="font-size: 0.9em; line-height: 1.4; margin: 1rem 0;"><code>import { formatCurrency } from 
   'https://unpkg.ai/esm/formatCurrency(amount:number,currency%3F:string):string.js';
 
 const formatted = formatCurrency(1234.56, 'EUR');
@@ -184,10 +173,10 @@ console.log(formatted); // "€1,234.56"</code></pre>
     </div>
 
     <!-- Tip Calculator Example -->
-    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+    <div style="margin: 1.5rem 0;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💰 Tip Calculator with Bill Splitting</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { calculateTip } from 
+        <pre style="font-size: 0.9em; line-height: 1.4; margin: 1rem 0;"><code>import { calculateTip } from 
   'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
 
 const result = calculateTip(85.50, 18, 4);
@@ -201,10 +190,10 @@ console.log(result); // { tip: 15.39, total: 100.89, perPerson: 25.22 }</code></
     </div>
 
     <!-- Password Generator Example -->
-    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+    <div style="margin: 1.5rem 0;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">🔐 Secure Password Generator</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { generatePassword } from 
+        <pre style="font-size: 0.9em; line-height: 1.4; margin: 1rem 0;"><code>import { generatePassword } from 
   'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
 
 const result = generatePassword({ length: 16, symbols: true });
@@ -218,10 +207,10 @@ console.log(result); // { password: 'K#9m$L2pQ!7vX8nR', strength: 95, feedback: 
     </div>
 
     <!-- Color Palette Example -->
-    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+    <div style="margin: 1.5rem 0;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">🎨 Color Palette Generator</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { generatePalette } from 
+        <pre style="font-size: 0.9em; line-height: 1.4; margin: 1rem 0;"><code>import { generatePalette } from 
   'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:"complementary"|"analogous"|"triadic"):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
 
 const palette = generatePalette('#3B82F6', 5, 'complementary');
@@ -235,10 +224,10 @@ console.log(palette); // { colors: [{hex: '#3B82F6', name: 'Blue'}, ...], scheme
     </div>
 
     <!-- Minesweeper Example -->
-    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+    <div style="margin: 1.5rem 0;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">💣 Complete Minesweeper Game</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { initMinesweeper } from 
+        <pre style="font-size: 0.9em; line-height: 1.4; margin: 1rem 0;"><code>import { initMinesweeper } from 
   'https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
 
 // Create container for the game
@@ -259,10 +248,10 @@ game.start(); // Full game with click handlers, animations, timer, score trackin
     </div>
 
     <!-- Rich Text Editor Example -->
-    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+    <div style="margin: 1.5rem 0;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">📝 Rich Text Editor</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createRichEditor } from 
+        <pre style="font-size: 0.9em; line-height: 1.4; margin: 1rem 0;"><code>import { createRichEditor } from 
   'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}.js';
 
 // Create container for the editor
@@ -286,10 +275,10 @@ editor.setContent('# Welcome\n\nStart typing...');</code></pre>
     </div>
 
     <!-- Dashboard Example -->
-    <div style="border: 1px solid #e5e7eb; border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; background: white;">
+    <div style="margin: 1.5rem 0;">
         <h3 style="margin: 0 0 0.5rem 0; color: #374151;">📊 Interactive Data Dashboard</h3>
         
-        <pre style="background: #f8fafc; padding: 1rem; border-radius: 0.375rem; border: 1px solid #e2e8f0; margin: 1rem 0; font-size: 0.9em; line-height: 1.4; overflow-x: auto;"><code>import { createDashboard } from 
+        <pre style="font-size: 0.9em; line-height: 1.4; margin: 1rem 0;"><code>import { createDashboard } from 
   'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}.js';
 
 // Create container for the dashboard
@@ -316,7 +305,7 @@ console.log('Chart added to dashboard');</code></pre>
     </div>
 
     <!-- Expandable Demo Section (hidden by default) -->
-    <div id="demoSection" style="display: none; border: 2px solid #3b82f6; border-radius: 0.5rem; padding: 1.5rem; margin: 2rem 0; background: #fafafa;">
+    <div id="demoSection" style="display: none; margin: 2rem 0; background: #f8fafc;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
             <h3 id="demoTitle" style="margin: 0; color: #374151;">Interactive Demo</h3>
             <button onclick="closeDemo()" style="padding: 0.25rem 0.5rem; background: #ef4444; color: white; border: none; border-radius: 0.25rem; cursor: pointer;">✕ Close</button>
@@ -328,7 +317,7 @@ console.log('Chart added to dashboard');</code></pre>
                 <div style="margin-bottom: 0.5rem;">
                     <button onclick="runCodeInIframe()" style="padding: 0.5rem 1rem; background: #10b981; color: white; border: none; border-radius: 0.25rem; cursor: pointer; font-weight: 500;">▶ Run</button>
                 </div>
-                <textarea id="codeEditor" style="width: 100%; height: 300px; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: 1px solid #d1d5db; border-radius: 0.25rem; resize: vertical;"></textarea>
+                <textarea id="codeEditor" style="width: 100%; height: 300px; font-family: monospace; font-size: 0.9em; padding: 0.75rem; border: none; background: white; border-radius: 0.25rem; resize: vertical; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"></textarea>
             </div>
             
             <!-- Tabbed Output -->
@@ -339,12 +328,12 @@ console.log('Chart added to dashboard');</code></pre>
                 </div>
                 
                 <div id="resultPanel" style="display: block;">
-                    <iframe id="resultFrame" style="width: 100%; height: 300px; border: 1px solid #d1d5db; border-radius: 0 0.25rem 0.25rem 0.25rem; background: white;">
+                    <iframe id="resultFrame" style="width: 100%; height: 300px; border: none; border-radius: 0 0.25rem 0.25rem 0.25rem; background: white; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
                     </iframe>
                 </div>
                 
                 <div id="consolePanel" style="display: none;">
-                    <div id="consoleOutput" style="background: #1f2937; color: #f9fafb; font-family: monospace; font-size: 0.85em; padding: 0.75rem; border-radius: 0 0.25rem 0.25rem 0.25rem; min-height: 300px; white-space: pre-wrap; overflow-y: auto;">Ready to run code...</div>
+                    <div id="consoleOutput" style="background: #1f2937; color: #f9fafb; font-family: monospace; font-size: 0.85em; padding: 0.75rem; border-radius: 0 0.25rem 0.25rem 0.25rem; min-height: 300px; white-space: pre-wrap; overflow-y: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">Ready to run code...</div>
                 </div>
             </div>
         </div>
@@ -386,7 +375,7 @@ console.log('Chart added to dashboard');</code></pre>
         
         function openDemo(buttonElement) {
             // Find the parent example container
-            const exampleContainer = buttonElement.closest('div[style*="border: 1px solid"]');
+            const exampleContainer = buttonElement.closest('div[style*="margin: 1.5rem 0"]');
             if (!exampleContainer) return;
             
             // Extract the title from the h3 element
@@ -521,7 +510,7 @@ console.log('Chart added to dashboard');</code></pre>
         // Utility functions
         function copyCode(buttonElement) {
             // Find the parent example container
-            const exampleContainer = buttonElement.closest('div[style*="border: 1px solid"]');
+            const exampleContainer = buttonElement.closest('div[style*="margin: 1.5rem 0"]');
             if (!exampleContainer) return;
             
             // Extract the code from the pre > code element
