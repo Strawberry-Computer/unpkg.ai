@@ -61,17 +61,14 @@ https://unpkg.ai/esm/createApiClient(config):object.js
 
 ## Complex Frontend Examples
 
-### Advanced form validator with real-time feedback
-https://unpkg.ai/esm/createFormValidator(config:{fields:{[key:string]:{required%3F:boolean,minLength%3F:number,pattern%3F:RegExp,validator%3F:(value:string)=>Promise<boolean>}},realTime%3F:boolean}):Promise<{validate:(formData:FormData)=>Promise<{isValid:boolean,errors:{[field:string]:string[]}}>,attachToForm:(form:HTMLFormElement)=>void,onFieldChange:(callback:(field:string,isValid:boolean,errors:string[])=>void)=>void}>.js
-
-### Drag and drop file uploader with progress tracking
-https://unpkg.ai/esm/createFileUploader(config:{endpoint:string,maxFileSize%3F:number,allowedTypes%3F:string[],multiple%3F:boolean,chunkSize%3F:number}):Promise<{attachTo:(element:HTMLElement)=>void,upload:(files:FileList)=>Promise<{success:boolean,results:{file:string,url%3F:string,error%3F:string}[]}>,onProgress:(callback:(file:string,percent:number)=>void)=>void}>.js
+### Complete minesweeper game with UI
+https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js
 
 ### Rich text editor with markdown support
-https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string,plugins%3F:string[],autoSave%3F:boolean}):Promise<{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void,onContentChange:(callback:(content:string,wordCount:number)=>void)=>void,exportAs:(format:'html'|'markdown'|'pdf')=>Promise<string|Blob>}>.js
+https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}.js
 
 ### Interactive data visualization dashboard
-https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string,responsive%3F:boolean}):Promise<{addChart:(id:string,type:string,data:any[],options%3F:any)=>void,updateChart:(id:string,data:any[])=>void,addFilter:(name:string,type:string,values:any[])=>void,onFilterChange:(callback:(filters:any)=>void)=>void,exportDashboard:(format:'png'|'pdf')=>Promise<Blob>}>.js
+https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}.js
 
 ## Usage in Code
 
@@ -102,6 +99,41 @@ const api = createApiClient({
   baseUrl: 'https://api.example.com', 
   apiKey: 'key123' 
 });
+```
+
+```javascript
+import { initMinesweeper } from 'https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
+const gameContainer = document.createElement('div');
+gameContainer.id = 'game-container';
+document.body.appendChild(gameContainer);
+const game = initMinesweeper('#game-container', { width: 10, height: 10, mines: 15 });
+game.start(); // Full game with click handlers, animations, timer, score tracking
+```
+
+```javascript
+import { createRichEditor } from 'https://unpkg.ai/esm/createRichEditor(config:{container:string,features%3F:string[],theme%3F:string}):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}.js';
+const editorContainer = document.createElement('div');
+editorContainer.id = 'editor';
+document.body.appendChild(editorContainer);
+const editor = createRichEditor({
+  container: '#editor',
+  features: ['bold', 'italic', 'lists', 'links']
+});
+editor.setContent('# Welcome\\n\\nStart typing...');
+```
+
+```javascript
+import { createDashboard } from 'https://unpkg.ai/esm/createDashboard(config:{container:string,layout%3F:string}):{addChart:(id:string,type:string,data:any[])=>void,updateChart:(id:string,data:any[])=>void}.js';
+const dashboardContainer = document.createElement('div');
+dashboardContainer.id = 'dashboard';
+document.body.appendChild(dashboardContainer);
+const dashboard = createDashboard({
+  container: '#dashboard',
+  layout: 'grid'
+});
+dashboard.addChart('sales', 'line', [
+  { x: 'Jan', y: 1000 }, { x: 'Feb', y: 1200 }
+]);
 ```
 
 ## Features
