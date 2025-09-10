@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 1200px;
+      height: 630px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card {
+      text-align: center;
+      z-index: 2;
+      max-width: 900px;
+      padding: 50px;
+    }
+    
+    .logo {
+      font-size: 90px;
+      font-weight: 900;
+      margin-bottom: 25px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      letter-spacing: -2px;
+    }
+    
+    .tagline {
+      font-size: 44px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      letter-spacing: -1px;
+    }
+    
+    .description {
+      font-size: 28px;
+      font-weight: 400;
+      opacity: 0.9;
+      margin-bottom: 35px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      line-height: 1.2;
+    }
+    
+    .example {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 20px 30px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 20px;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      border: 1px solid rgba(255,255,255,0.2);
+      line-height: 1.4;
+    }
+    
+    .example .highlight {
+      background: rgba(255,255,100,0.3);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    
+    .background-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.08;
+      background-size: 60px 60px;
+      background-image: 
+        radial-gradient(circle, white 2px, transparent 2px);
+    }
+    
+    .floating-code {
+      position: absolute;
+      font-family: monospace;
+      opacity: 0.12;
+      font-size: 16px;
+      color: rgba(255,255,255,0.8);
+    }
+    
+    .code-1 { top: 12%; left: 6%; transform: rotate(-12deg); }
+    .code-2 { top: 18%; right: 8%; transform: rotate(8deg); }
+    .code-3 { bottom: 18%; left: 6%; transform: rotate(-6deg); }
+    .code-4 { bottom: 25%; right: 8%; transform: rotate(15deg); }
+  </style>
+</head>
+<body>
+  <div class="background-pattern"></div>
+  
+  <div class="floating-code code-1">import { formatCurrency }</div>
+  <div class="floating-code code-2">generatePalette('#3B82F6')</div>
+  <div class="floating-code code-3">initMinesweeper('#game')</div>
+  <div class="floating-code code-4">createDashboard('..')</div>
+  
+  <div class="card">
+    <div class="logo">🚀 unpkg.ai</div>
+    <div class="tagline">Vibe coded JS modules on demand</div>
+    <div class="example">unpkg.ai/esm/<span class="highlight">your-prompt-here</span>.js</div>
+  </div>
+</body>
+</html>
