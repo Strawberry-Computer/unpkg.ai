@@ -70,7 +70,45 @@ document.body.appendChild(gameContainer);
 
 // Creates a complete playable minesweeper game with UI
 const game = initMinesweeper('#game-container', { width: 10, height: 10, mines: 15 });
+console.log('Game initialized:', game);
 game.start(); // Full game with click handlers, animations, timer, score tracking
+```
+
+### Rich Text Editor
+**Request:** [https://unpkg.ai/esm/createRichEditor(container:string):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}|Rich+text+editor+with+bold+italic+lists+links+features.js](https://unpkg.ai/esm/createRichEditor(container:string):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}|Rich+text+editor+with+bold+italic+lists+links+features.js)
+
+```javascript
+import { createRichEditor } from 'https://unpkg.ai/esm/createRichEditor(container:string):{getContent:()=>string,setContent:(content:string)=>void,insertText:(text:string)=>void}|Rich+text+editor+with+bold+italic+lists+links+features.js';
+
+// Create container for the editor
+const editorContainer = document.createElement('div');
+editorContainer.id = 'editor';
+editorContainer.style.cssText = 'border: 1px solid #e5e7eb; border-radius: 8px; min-height: 200px; background: white;';
+document.body.appendChild(editorContainer);
+
+const editor = createRichEditor('#editor');
+console.log('Editor created:', editor);
+editor.setContent('# Welcome\\n\\nStart typing...');
+```
+
+### Interactive Data Dashboard
+**Request:** [https://unpkg.ai/esm/createDashboard(containerSelector:string):{addChart:(id:string,type:string,data:{x:string,y:number}[])=>void,updateChart:(id:string,data:{x:string,y:number}[])=>void,addFilter:(name:string,callback:(data:{x:string,y:number}[])=>{x:string,y:number}[])=>void}|Interactive+dashboard+with+single+line+chart+and+filtering+that+preserves+data+order.js](https://unpkg.ai/esm/createDashboard(containerSelector:string):{addChart:(id:string,type:string,data:{x:string,y:number}[])=>void,updateChart:(id:string,data:{x:string,y:number}[])=>void,addFilter:(name:string,callback:(data:{x:string,y:number}[])=>{x:string,y:number}[])=>void}|Interactive+dashboard+with+single+line+chart+and+filtering+that+preserves+data+order.js)
+
+```javascript
+import { createDashboard } from 'https://unpkg.ai/esm/createDashboard(containerSelector:string):{addChart:(id:string,type:string,data:{x:string,y:number}[])=>void,updateChart:(id:string,data:{x:string,y:number}[])=>void,addFilter:(name:string,callback:(data:{x:string,y:number}[])=>{x:string,y:number}[])=>void}|Interactive+dashboard+with+single+line+chart+and+filtering+that+preserves+data+order.js';
+
+// Create container for the dashboard
+const dashboardContainer = document.createElement('div');
+dashboardContainer.id = 'dashboard';
+dashboardContainer.style.cssText = 'border: 1px solid #e5e7eb; border-radius: 8px; min-height: 300px; background: white; padding: 1rem;';
+document.body.appendChild(dashboardContainer);
+
+const dashboard = createDashboard('#dashboard');
+
+// Add interactive sales chart
+dashboard.addChart('sales', 'line', [
+  { x: 'Jan', y: 1000 }, { x: 'Feb', y: 1200 }, { x: 'Mar', y: 800 }, { x: 'Apr', y: 1500 }
+]);
 ```
 
 
