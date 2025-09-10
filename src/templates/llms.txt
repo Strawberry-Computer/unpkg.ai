@@ -1,5 +1,8 @@
 # unpkg.ai - AI-powered ESM module generation service
 
+## Zero Friction Promise
+No signup required. No API keys needed. No authentication. Just import and code.
+
 ## Overview
 unpkg.ai generates and serves ES modules dynamically based on URL-encoded prompts. Include full TypeScript-style type definitions in your prompts to get modules with precise JSDoc annotations.
 
@@ -140,6 +143,7 @@ dashboard.addChart('sales', 'line', [
 ```
 
 ## Features
+- Zero friction - No signup, no API keys, no authentication required
 - Permanent caching - Generated modules cached indefinitely
 - TypeScript integration via JSDoc annotations
 - CDN-ready with long cache headers

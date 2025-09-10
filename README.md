@@ -2,6 +2,16 @@
 
 AI-powered ESM module generation service that creates JavaScript modules on-demand using Pollinations.ai.
 
+## Zero Friction Promise
+
+🎯 **No signup required**  
+🎯 **No API keys needed**  
+🎯 **No authentication**  
+🎯 **No rate limits for basic usage**  
+🎯 **Just import and code**
+
+Perfect for prototyping, learning, and production when you need modules fast.
+
 ## Overview
 
 unpkg.ai generates and serves ES modules dynamically based on URL-encoded prompts. Include full TypeScript-style type definitions in your prompts to get modules with precise JSDoc annotations.
