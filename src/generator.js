@@ -1,7 +1,21 @@
 import { pollinations } from './pollinations.js'
+import { openrouter } from './openrouter.js'
 import { createDebugger } from './debug.js'
 
 const debug = createDebugger('generator')
+
+// Model whitelist - centralized model validation
+const ALLOWED_MODELS = new Set([
+  'openai'
+])
+
+// Provider chain - try in order until success
+function getProviderChain() {
+  if (process.env.FORCE_OPENROUTER === 'yes') {
+    return [openrouter]
+  }
+  return [pollinations, openrouter]
+}
 
 const SYSTEM_PROMPT = `<instructions>
 You are a JavaScript module generator. Given a function signature or description, generate a complete ES module.
@@ -48,26 +62,46 @@ Generate a complete ES module for the following request:`
 
 export const generator = {
   async generate(prompt, queryParams = {}) {
-    try {
-      const fullPrompt = `${SYSTEM_PROMPT}\n\n${prompt}`
-      debug('Generating for prompt:', prompt)
-      debug('Full prompt length:', fullPrompt.length)
-      
-      const response = await pollinations.generate(fullPrompt, queryParams)
-      debug('Got response from API, length:', response.content.length)
-      debug('Provider used:', response.provider)
-      
-      debug('Module generation successful')
-      
-      return {
-        content: response.content.trim(),
-        provider: response.provider
-      }
-      
-    } catch (error) {
-      debug('Generator error:', error.message)
-      throw error
+    const { model = 'openai' } = queryParams
+    
+    // Validate model against whitelist
+    if (!ALLOWED_MODELS.has(model)) {
+      throw new Error(`Model '${model}' is not whitelisted. Allowed models: ${Array.from(ALLOWED_MODELS).join(', ')}`)
     }
+    
+    const fullPrompt = `${SYSTEM_PROMPT}\n\n${prompt}`
+    debug('Generating for prompt:', prompt)
+    debug('Model:', model, '(validated)')
+    debug('Full prompt length:', fullPrompt.length)
+    
+    // Try each provider in chain until success
+    const providers = getProviderChain()
+    const errors = []
+    
+    debug(`Provider chain: ${providers.length === 1 ? 'OpenRouter only' : 'Pollinations -> OpenRouter'}`)
+    
+    for (const provider of providers) {
+      try {
+        debug(`Trying provider: ${provider.constructor?.name || 'unknown'}`)
+        const response = await provider.generate(fullPrompt, queryParams)
+        debug('Got response from provider, length:', response.content.length)
+        debug('Provider used:', response.provider)
+        
+        debug('Module generation successful')
+        
+        return {
+          content: response.content.trim(),
+          provider: response.provider
+        }
+        
+      } catch (error) {
+        debug(`Provider failed: ${error.message}`)
+        errors.push(`${provider.generate.name || 'unknown'}: ${error.message}`)
+      }
+    }
+    
+    // All providers failed
+    throw new Error(`All providers failed: ${errors.join(', ')}`)
   }
 }
 
