@@ -1,6 +1,7 @@
 import test from 'tape'
 import { pollinations } from '../src/pollinations.js'
 import { openrouter } from '../src/openrouter.js'
+import { generator } from '../src/generator.js'
 
 const originalEnv = process.env
 
@@ -39,7 +40,7 @@ test('OpenRouter fallback - successful fallback when pollinations fails', async 
   process.env.OPENROUTER_API_KEY = 'test-key'
 
   try {
-    const result = await pollinations.generate('test prompt', { fetch: mockFetch })
+    const result = await generator.generate('test prompt', { fetch: mockFetch })
     
     t.ok(pollinationsCalled, 'pollinations API should be called first')
     t.ok(openrouterCalled, 'openrouter API should be called as fallback')
@@ -71,12 +72,12 @@ test('OpenRouter fallback - both APIs fail', async (t) => {
   process.env.OPENROUTER_API_KEY = 'test-key'
 
   try {
-    await pollinations.generate('test prompt', { fetch: mockFetch })
+    await generator.generate('test prompt', { fetch: mockFetch })
     t.fail('Should have thrown an error when both APIs fail')
     
   } catch (error) {
-    t.ok(error.message.includes('Both APIs failed'), 
-         'should indicate both APIs failed')
+    t.ok(error.message.includes('All providers failed'), 
+         'should indicate all providers failed')
   }
   
   // Cleanup
@@ -110,7 +111,7 @@ test('OpenRouter direct usage with FORCE_OPENROUTER', async (t) => {
   process.env.OPENROUTER_API_KEY = 'test-key'
 
   try {
-    const result = await pollinations.generate('test prompt', { fetch: mockFetch })
+    const result = await generator.generate('test prompt', { fetch: mockFetch })
     
     t.notOk(pollinationsCalled, 'pollinations API should not be called when forced')
     t.ok(openrouterCalled, 'openrouter API should be called directly when forced')
@@ -299,7 +300,7 @@ test('Pollinations API error handling', async (t) => {
   process.env.OPENROUTER_API_KEY = 'test-key'
 
   try {
-    const result = await pollinations.generate('test prompt', { fetch: mockFetch })
+    const result = await generator.generate('test prompt', { fetch: mockFetch })
     
     // Should fallback and not throw
     t.equal(result.provider, 'openrouter', 'should fallback on Pollinations HTTP error')
