@@ -98,7 +98,7 @@ app.get('/esm/:prompt', async (c) => {
     
   } catch (error) {
     console.error('Error generating module:', error)
-    return c.json({ error: 'Failed to generate module' }, 500)
+    return c.json({ error: error.message || 'Failed to generate module' }, 500)
   }
 })
 
