@@ -122,35 +122,6 @@ dashboard.addChart('sales', 'line', [
 ```
 
 
-## API Response Format
-
-When you include TypeScript-style signatures, you get precise JSDoc annotations:
-
-```javascript
-/**
- * @typedef {Object} User
- * @property {number} id
- * @property {string} name
- * @property {string} email
- * @property {Date} createdAt
- */
-
-/**
- * @typedef {Object} FetchUserOptions
- * @property {boolean} [includeProfile]
- * @property {number} [timeout]
- */
-
-/**
- * @param {number} userId
- * @param {FetchUserOptions} [options]
- * @returns {Promise<User>}
- */
-export async function fetchUser(userId, options = {}) {
-  const { includeProfile = false, timeout = 5000 } = options;
-  // Implementation matching the exact signature
-}
-```
 
 ## Prompt Syntax
 
