@@ -181,7 +181,7 @@ test('OpenRouter API response validation', async (t) => {
 })
 
 test('OpenRouter model mapping', async (t) => {
-  t.plan(2)
+  t.plan(1)
 
   let requestBody = null
 
@@ -202,12 +202,44 @@ test('OpenRouter model mapping', async (t) => {
     await openrouter.generate('test prompt', { model: 'openai', fetch: mockFetch })
     t.equal(requestBody.model, 'openai/gpt-5-nano', 'should map openai to gpt-5-nano')
     
-    // Test unmapped model falls back to default
-    await openrouter.generate('test prompt', { model: 'unknown-model', fetch: mockFetch })
-    t.equal(requestBody.model, 'openai/gpt-5-nano', 'should fallback to default for unknown models')
-    
   } catch (error) {
     t.fail(`Should not fail: ${error.message}`)
+  }
+  
+  // Cleanup
+  process.env = { ...originalEnv }
+})
+
+test('OpenRouter model whitelist validation', async (t) => {
+  t.plan(2)
+
+  const mockFetch = async (url, options) => {
+    if (url.includes('openrouter.ai')) {
+      return createMockResponse(200, {
+        choices: [{ message: { content: 'export function test() { return "test"; }' } }]
+      })
+    }
+    throw new Error('Unexpected URL')
+  }
+
+  process.env.OPENROUTER_API_KEY = 'test-key'
+
+  try {
+    // Test valid model
+    const result = await openrouter.generate('test prompt', { model: 'openai', fetch: mockFetch })
+    t.ok(result.content, 'should accept whitelisted model')
+    
+  } catch (error) {
+    t.fail(`Should not fail for valid model: ${error.message}`)
+  }
+
+  try {
+    // Test invalid model
+    await openrouter.generate('test prompt', { model: 'unknown-model', fetch: mockFetch })
+    t.fail('Should have thrown an error for non-whitelisted model')
+    
+  } catch (error) {
+    t.ok(error.message.includes('not whitelisted'), 'should reject non-whitelisted model')
   }
   
   // Cleanup

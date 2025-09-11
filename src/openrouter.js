@@ -9,7 +9,12 @@ const MODEL_MAPPING = {
 export const openrouter = {
   async generate(prompt, options = {}) {
     const { model = 'openai', seed = null, fetch: fetchFn = fetch } = options
-    const mappedModel = MODEL_MAPPING[model] || MODEL_MAPPING.openai
+    
+    if (!MODEL_MAPPING[model]) {
+      throw new Error(`Model '${model}' is not whitelisted for OpenRouter`)
+    }
+    
+    const mappedModel = MODEL_MAPPING[model]
     
     debug('API request with model:', model, '-> mapped to:', mappedModel, 'seed:', seed)
     
