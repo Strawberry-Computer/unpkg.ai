@@ -8,7 +8,7 @@ const MODEL_MAPPING = {
 
 export const openrouter = {
   async generate(prompt, options = {}) {
-    const { model = 'openai', seed = null } = options
+    const { model = 'openai', seed = null, fetch: fetchFn = fetch } = options
     const mappedModel = MODEL_MAPPING[model] || MODEL_MAPPING.openai
     
     debug('API request with model:', model, '-> mapped to:', mappedModel, 'seed:', seed)
@@ -23,7 +23,7 @@ export const openrouter = {
         requestBody.seed = seed
       }
       
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      const response = await fetchFn('https://openrouter.ai/api/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
@@ -55,7 +55,7 @@ export const openrouter = {
       
     } catch (error) {
       console.error('OpenRouter API error:', error)
-      throw new Error('Failed to generate content from OpenRouter API')
+      throw new Error(`OpenRouter API failed: ${error.message}`)
     }
   }
 }
