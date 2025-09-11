@@ -41,7 +41,7 @@ GET /esm/{url-encoded-prompt}.js?model={model}&seed={seed}
 **Request:** [https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js](https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js)
 
 ```javascript
-import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people%3F:number):{tip:number,total:number,perPerson:number}.js';
+import { calculateTip } from 'https://unpkg.ai/esm/calculateTip(amount:number,percentage:number,people?:number):{tip:number,total:number,perPerson:number}.js';
 
 const result = calculateTip(85.50, 18, 4);
 console.log(result); // { tip: 15.39, total: 100.89, perPerson: 25.22 }
@@ -51,7 +51,7 @@ console.log(result); // { tip: 15.39, total: 100.89, perPerson: 25.22 }
 **Request:** [https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js](https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js)
 
 ```javascript
-import { generatePassword } from 'https://unpkg.ai/esm/generatePassword(options%3F:{length%3F:number,symbols%3F:boolean,numbers%3F:boolean,uppercase%3F:boolean,lowercase%3F:boolean}):{password:string,strength:number,feedback:string[]}.js';
+import { generatePassword } from 'https://unpkg.ai/esm/generatePassword(options?:{length?:number,symbols?:boolean,numbers?:boolean,uppercase?:boolean,lowercase?:boolean}):{password:string,strength:number,feedback:string[]}.js';
 
 const result = generatePassword({ length: 16, symbols: true, numbers: true });
 console.log(result); // { password: 'K#9m$L2pQ!7vX8nR', strength: 95, feedback: ['Very strong'] }
@@ -61,7 +61,7 @@ console.log(result); // { password: 'K#9m$L2pQ!7vX8nR', strength: 95, feedback: 
 **Request:** [https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:'complementary'|'analogous'|'triadic'):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js](https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:'complementary'|'analogous'|'triadic'):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js)
 
 ```javascript
-import { generatePalette } from 'https://unpkg.ai/esm/generatePalette(baseColor:string,count%3F:number,type%3F:'complementary'|'analogous'|'triadic'):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
+import { generatePalette } from 'https://unpkg.ai/esm/generatePalette(baseColor:string,count?:number,type?:'complementary'|'analogous'|'triadic'):{colors:{hex:string,rgb:string,hsl:string,name:string}[],scheme:string}.js';
 
 const palette = generatePalette('#3B82F6', 5, 'complementary');
 console.log(palette.colors); // Array of 5 complementary colors with multiple formats
@@ -71,7 +71,7 @@ console.log(palette.colors); // Array of 5 complementary colors with multiple fo
 **Request:** [https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js](https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js)
 
 ```javascript
-import { initMinesweeper } from 'https://unpkg.ai/esm/initMinesweeper(container:string,options%3F:{width%3F:number,height%3F:number,mines%3F:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
+import { initMinesweeper } from 'https://unpkg.ai/esm/initMinesweeper(container:string,options?:{width?:number,height?:number,mines?:number}):{start:()=>void,reset:()=>void,getStats:()=>{games:number,wins:number,time:number}}.js';
 
 // Create container for the game
 const gameContainer = document.createElement('div');
