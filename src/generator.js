@@ -71,15 +71,3 @@ export const generator = {
   }
 }
 
-function extractFunctionName(prompt) {
-  // Try to extract function name from signature like "functionName(params)"
-  const match = prompt.match(/^([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(/)
-  return match ? match[1] : 'generatedFunction'
-}
-
-function generateFallback(functionName, originalPrompt) {
-  return `// Generated from: ${originalPrompt}
-export function ${functionName}(...args) {
-  throw new Error('Function ${functionName} is not yet implemented');
-}`
-}
